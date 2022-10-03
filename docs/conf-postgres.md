@@ -1,8 +1,8 @@
 # Configuring PostgreSQL for Monitoring
 
-Monitoring PostgreSQL metrics with the [postgres_exporter](https://github.com/wrouesnel/postgres_exporter) is enabled by `pmm-admin add postgresql` command. The `postgresql` alias will set up `postgresql:metrics` and also `linux:metrics` on a host (for more information, see [Adding monitoring services](pmm-admin.md)).
+Monitoring PostgreSQL metrics with the [postgres_exporter](https://github.com/wrouesnel/postgres_exporter) is enabled by `ssm-admin add postgresql` command. The `postgresql` alias will set up `postgresql:metrics` and also `linux:metrics` on a host (for more information, see [Adding monitoring services](ssm-admin.md)).
 
-`pmm-admin` supports passing PostgreSQL connection information via following flags:
+`ssm-admin` supports passing PostgreSQL connection information via following flags:
 
 | Flag         | Description         |
 | ------------ | ------------------- |
@@ -14,7 +14,7 @@ Monitoring PostgreSQL metrics with the [postgres_exporter](https://github.com/wr
 An example command line would look like this:
 
 ```
-pmm-admin add postgresql --host=localhost --password='secret' --port=5432 --user=pmm_user
+ssm-admin add postgresql --host=localhost --password='secret' --port=5432 --user=ssm_user
 ```
 
 !!! alert alert-info "Note"
@@ -27,19 +27,19 @@ SELECT pg_reload_conf();
 
 ## Supported versions of PostgreSQL
 
-PMM follows [postgresql.org EOL policy](https://www.postgresql.org/support/versioning/), and thus supports monitoring PostgreSQL version 9.4 and up.  Older versions may work, but will not be supported.  For additional assistance, visit [Percona PMM Forums](https://www.percona.com/forums/questions-discussions/percona-monitoring-and-management/).
+SSM follows [postgresql.org EOL policy](https://www.postgresql.org/support/versioning/), and thus supports monitoring PostgreSQL version 9.4 and up.  Older versions may work, but will not be supported.
 
 ### Setting Up the Required Permissions
 
-Percona recommends that a PostgreSQL user be configured for `SUPERUSER` level access, in order to gather the maximum amount of data with a minimum amount of complexity. This can be done with the following command for the standalone PostgreSQL installation:
+We recommends that a PostgreSQL user be configured for `SUPERUSER` level access, in order to gather the maximum amount of data with a minimum amount of complexity. This can be done with the following command for the standalone PostgreSQL installation:
 
 ```
-CREATE USER pmm_user WITH SUPERUSER ENCRYPTED PASSWORD 'secret';
+CREATE USER ssm_user WITH SUPERUSER ENCRYPTED PASSWORD 'secret';
 ```
 
 !!! alert alert-info "Note"
     In case of monitoring a PostgreSQL database running on an Amazon RDS instance, the command should look as follows:
 
     ```
-    CREATE USER pmm_user WITH rds_superuser ENCRYPTED PASSWORD 'secret';
+    CREATE USER ssm_user WITH rds_superuser ENCRYPTED PASSWORD 'secret';
     ```
