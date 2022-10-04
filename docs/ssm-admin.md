@@ -1,6 +1,6 @@
-# Managing PMM Client
+# Managing SSM Client
 
-Use the `pmm-admin` tool to manage PMM Client.
+Use the `ssm-admin` tool to manage SSM Client.
 
 In this chapter
 
@@ -9,16 +9,16 @@ In this chapter
 ## USAGE
 
 ```
-pmm-admin [OPTIONS] [COMMAND]
+ssm-admin [OPTIONS] [COMMAND]
 ```
 
 !!! alert alert-info "Note"
-    The **pmm-admin** tool requires root access (you should either be logged in as a user with root privileges or be able to run commands with **sudo**).
+    The **ssm-admin** tool requires root access (you should either be logged in as a user with root privileges or be able to run commands with **sudo**).
 
-To view all available commands and options, run **pmm-admin** without any commands or options:
+To view all available commands and options, run **ssm-admin** without any commands or options:
 
 ```
-$ sudo pmm-admin
+$ sudo ssm-admin
 ```
 
 ## OPTIONS
@@ -26,88 +26,88 @@ $ sudo pmm-admin
 The following options can be used with any command:
 
 `-c`, `--config-file`
-:    Specify the location of PMM configuration file (default `/usr/local/percona/pmm-client/pmm.yml`).
+:    Specify the location of SSM configuration file (default `/opt/ss/ssm-client/ssm.yml`).
 
 `-h`, `--help`
 :     Print help for any command and exit.
 
 `-v`, `--version`
-:     Print version of PMM Client.
+:     Print version of SSM Client.
 
 `--verbose`
 :     Print verbose output.
 
 ## COMMANDS
 
-[**pmm-admin add**](#adding-monitoring-services)
+[**ssm-admin add**](#adding-monitoring-services)
 :     Add a monitoring service.
 
 [Adding annotations](#adding-annotations)
 :     Add an annotation
 
-[**pmm-admin check-network**](#checking-network-connectivity)
-:     Check network connection between PMM Client and PMM Server.
+[**ssm-admin check-network**](#checking-network-connectivity)
+:     Check network connection between SSM Client and SSM Server.
 
-[**pmm-admin config**](#configuring-pmm-client)
-:     Configure how PMM Client communicates with PMM Server.
+[**ssm-admin config**](#configuring-ssm-client)
+:     Configure how SSM Client communicates with SSM Server.
 
-[**pmm-admin help**](#getting-help-for-any-command)
+[**ssm-admin help**](#getting-help-for-any-command)
 :     Print help for any command and exit.
 
-[**pmm-admin info**](#getting-information-about-pmm-client)
-:     Print information about PMM Client.
+[**ssm-admin info**](#getting-information-about-ssm-client)
+:     Print information about SSM Client.
 
-[**pmm-admin list**](#listing-monitoring-services)
-:     List all monitoring services added for this PMM Client.
+[**ssm-admin list**](#listing-monitoring-services)
+:     List all monitoring services added for this SSM Client.
 
-[**pmm-admin ping**](#pinging-pmm-server)
-:     Check if PMM Server is alive.
+[**ssm-admin ping**](#pinging-ssm-server)
+:     Check if SSM Server is alive.
 
-[**pmm-admin purge**](#purging-metrics-data)
-:     Purge metrics data on PMM Server.
+[**ssm-admin purge**](#purging-metrics-data)
+:     Purge metrics data on SSM Server.
 
-[**pmm-admin remove**, **pmm-admin rm**](#removing-monitoring-services)
+[**ssm-admin remove**, **ssm-admin rm**](#removing-monitoring-services)
 :     Remove monitoring services.
 
-[**pmm-admin repair**](#removing-orphaned-services)
+[**ssm-admin repair**](#removing-orphaned-services)
 :     Remove orphaned services.
 
-[**pmm-admin restart**](#restarting-monitoring-services)
+[**ssm-admin restart**](#restarting-monitoring-services)
 :     Restart monitoring services.
 
-[**pmm-admin show-passwords**](#getting-passwords-used-by-pmm-client)
-:     Print passwords used by PMM Client (stored in the configuration file).
+[**ssm-admin show-passwords**](#getting-passwords-used-by-ssm-client)
+:     Print passwords used by SSM Client (stored in the configuration file).
 
-[**pmm-admin start**](#starting-monitoring-services)
+[**ssm-admin start**](#starting-monitoring-services)
 :     Start monitoring service.
 
-[**pmm-admin stop**](#stopping-monitoring-services)
+[**ssm-admin stop**](#stopping-monitoring-services)
 :     Stop monitoring service.
 
-[**pmm-admin uninstall**](#cleaning-up-before-uninstall)
-:     Clean up PMM Client before uninstalling it.
+[**ssm-admin uninstall**](#cleaning-up-before-uninstall)
+:     Clean up SSM Client before uninstalling it.
 
 ## Adding monitoring services
 
-Use the **pmm-admin add** command to add monitoring services.
+Use the **ssm-admin add** command to add monitoring services.
 
 ### USAGE
 
 ```
-$ pmm-admin add [OPTIONS] [SERVICE]
+$ ssm-admin add [OPTIONS] [SERVICE]
 ```
 
-When you add a monitoring service **pmm-admin** automatically creates and sets up a service in the operating system. You can tweak the **systemd** configuration file and change its behavior.
+When you add a monitoring service **ssm-admin** automatically creates and sets up a service in the operating system. You can tweak the **systemd** configuration file and change its behavior.
 
 For example, you may need to disable the HTTPS protocol for the Prometheus exporter associated with the given service. To accomplish this task, you need to remove all SSL related options.
 
 Run the following commands as root or by using the **sudo** command:
 
-1. Open the **systemd** unit file associated with the monitoring service that you need to change, such as `pmm-mysql-metrics-42002.service`.
+1. Open the **systemd** unit file associated with the monitoring service that you need to change, such as `ssm-mysql-metrics-42002.service`.
 
     ```
     $ cd /etc/systemd/system
-    $ cat pmm-mysql-metrics-42002.service
+    $ cat ssm-mysql-metrics-42002.service
     ```
 
 2. Remove the SSL related configuration options (key, cert) from the **systemd** unit file or init.d startup script. Examples of the systemd Unit File highlights the SSL related options in the **systemd** unit file.
@@ -115,7 +115,7 @@ Run the following commands as root or by using the **sudo** command:
     The following code demonstrates how you can remove the options using the **sed** command. (If you need more information about how **sed** works, see the documentation of your system).
 
     ```
-    $ sed -e -i.backup 's/-web.ssl[^ ]\+[^->]*//g' pmm-mysql-metrics-42002.service
+    $ sed -e -i.backup 's/-web.ssl[^ ]\+[^->]*//g' ssm-mysql-metrics-42002.service
     ```
 
 3. Reload **systemd**:
@@ -124,21 +124,21 @@ Run the following commands as root or by using the **sudo** command:
     $ systemctl daemon-reload
     ```
 
-4. Restart the monitoring service by using **pmm-admin restart**:
+4. Restart the monitoring service by using **ssm-admin restart**:
 
     ```
-    $ pmm-admin restart mysql:metrics
+    $ ssm-admin restart mysql:metrics
     ```
 
 ### OPTIONS
 
-The following option can be used with the **pmm-admin add** command:
+The following option can be used with the **ssm-admin add** command:
 
 `--dev-enable`
 :     Enable experimental features.
 
 `--disable-ssl`
-:     Disable (otherwise enabled) SSL for the connection between PMM Client and PMM Server. Turning off SSL encryption for the data acquired from some objects of monitoring allows to decrease the overhead for a PMM Server connected with a lot of nodes.
+:     Disable (otherwise enabled) SSL for the connection between SSM Client and SSM Server. Turning off SSL encryption for the data acquired from some objects of monitoring allows to decrease the overhead for a SSM Server connected with a lot of nodes.
 
 `--service-port`
 :  Specify the service port.
@@ -149,48 +149,48 @@ You can also use global options that apply to any other command.
 
 Specify a monitoring service alias, along with any relevant additional arguments.
 
-For more information, run **pmm-admin add** `--help`.
+For more information, run **ssm-admin add** `--help`.
 
 ### Adding external monitoring services
 
-The **pmm-admin add** command is also used to add external monitoring services. This command adds an external monitoring service assuming that the underlying Prometheus exporter is already set up and accessible. The default scrape timeout is 10 seconds, and the interval equals to 1 minute.
+The **ssm-admin add** command is also used to add external monitoring services. This command adds an external monitoring service assuming that the underlying Prometheus exporter is already set up and accessible. The default scrape timeout is 10 seconds, and the interval equals to 1 minute.
 
 To add an external monitoring service use the `external:service` monitoring service followed by the port number, name of a Prometheus job. These options are required. To specify the port number the `--service-port` option.
 
 ```
-$ pmm-admin add external:service --service-port=9187 postgresql
+$ ssm-admin add external:service --service-port=9187 postgresql
 
-pmm-admin 1.12.0
+ssm-admin 1.12.0
 
-PMM Server      | 127.0.0.1:80
-Client Name     | percona
+SSM Server      | 127.0.0.1:80
+Client Name     | ssm
 Client Address  | 172.17.0.1
 Service Manager | linux-systemd
 
 ...
 
 Job name    Scrape interval  Scrape timeout  Metrics path  Scheme  Target           Labels              Health
-postgresql  10s              1m              /metrics      http    172.17.0.1:9187  instance="percona"
+postgresql  10s              1m              /metrics      http    172.17.0.1:9187  instance="ssm"
 ```
 
-By default, the **pmm-admin add** command automatically creates the name of the host to be displayed in the Host field of the *Advanced Data Exploration* dashboard where the metrics of the newly added external monitoring service will be displayed. This name matches the name of the host where **pmm-admin** is installed. You may choose another display name when adding the `external:service` monitoring service giving it explicitly after the Prometheus exporter name.
+By default, the **ssm-admin add** command automatically creates the name of the host to be displayed in the Host field of the *Advanced Data Exploration* dashboard where the metrics of the newly added external monitoring service will be displayed. This name matches the name of the host where **ssm-admin** is installed. You may choose another display name when adding the `external:service` monitoring service giving it explicitly after the Prometheus exporter name.
 
-You may also use the `external:metrics` monitoring service. When using this option, you refer to the exporter by using a URL and a port number. The following example adds an external monitoring service which monitors a PostgreSQL instance at 192.168.200.1, port 9187. After the command completes, the **pmm-admin list** command shows the newly added external exporter at the bottom of the command’s output:
+You may also use the `external:metrics` monitoring service. When using this option, you refer to the exporter by using a URL and a port number. The following example adds an external monitoring service which monitors a PostgreSQL instance at 192.168.200.1, port 9187. After the command completes, the **ssm-admin list** command shows the newly added external exporter at the bottom of the command’s output:
 
 Run this command as root or by using the **sudo** command
 
 ```
-$ pmm-admin add external:metrics postgresql 192.168.200.1:9187
+$ ssm-admin add external:metrics postgresql 192.168.200.1:9187
 
-PMM Server      | 192.168.100.1
-Client Name     | percona
+SSM Server      | 192.168.100.1
+Client Name     | ssm
 Client Address  | 192.168.200.1
 Service Manager | linux-systemd
 
 -------------- -------- ----------- -------- ------------ --------
 SERVICE TYPE   NAME     LOCAL PORT  RUNNING  DATA SOURCE  OPTIONS
 -------------- -------- ----------- -------- ------------ --------
-linux:metrics  percona  42000       YES                 -
+linux:metrics  ssm      42000       YES                 -
 
 
 Name      Scrape interval  Scrape timeout  Metrics path  Scheme  Instances
@@ -199,32 +199,32 @@ postgres  10s              1m              /metrics      http    192.168.200.1:9
 
 ### Passing options to the exporter
 
-**pmm-admin add** sends all options which follow `--` (two consecutive dashes delimited by whitespace) to the Prometheus exporter that the given monitoring services uses. Each exporter has its own set of options.
+**ssm-admin add** sends all options which follow `--` (two consecutive dashes delimited by whitespace) to the Prometheus exporter that the given monitoring services uses. Each exporter has its own set of options.
 
 Run the following commands as root or by using the **sudo** command.
 
 Passing `--collect.perf_schema.eventsstatements` to the `mysql:metrics` monitoring service:
 
 ```
-$ pmm-admin add mysql:metrics -- --collect.perf_schema.eventsstatements
+$ ssm-admin add mysql:metrics -- --collect.perf_schema.eventsstatements
 ```
 
 Passing `--collect.perf_schema.eventswaits=false` to the `mysql:metrics` monitoring service:
 
 ```
-$ pmm-admin add mysql:metrics -- --collect.perf_schema.eventswaits=false
+$ ssm-admin add mysql:metrics -- --collect.perf_schema.eventswaits=false
 ```
 
 The section [Exporters Overview](index.exporter-option.md) contains all option grouped by exporters.
 
 ### Passing SSL parameters to the mongodb monitoring service
 
-SSL/TLS related parameters are passed to an SSL enabled MongoDB server as monitoring service parameters along with the **pmm-admin add** command when adding the `mongodb:metrics` monitoring service.
+SSL/TLS related parameters are passed to an SSL enabled MongoDB server as monitoring service parameters along with the **ssm-admin add** command when adding the `mongodb:metrics` monitoring service.
 
 Run this command as root or by using the **sudo** command
 
 ```
-$ pmm-admin add mongodb:metrics -- --mongodb.tls
+$ ssm-admin add mongodb:metrics -- --mongodb.tls
 ```
 
 ### Supported SSL/TLS Parameters
@@ -238,7 +238,7 @@ $ pmm-admin add mongodb:metrics -- --mongodb.tls
 | `--mongodb.tls-private-key` *string*        | A path to a PEM file that contains the private key (if not contained in the `mongodb.tls-cert` file). |
 
 !!! alert alert-info "Note"
-    PMM does not support passing SSL/TLS related parameters to `mongodb:queries`.
+    SSM does not support passing SSL/TLS related parameters to `mongodb:queries`.
 
 ```
 $ mongod --dbpath=DATABASEDIR --profile 2 --slowms 200 --rateLimit 100
@@ -251,13 +251,13 @@ Use the `linux:metrics` alias to enable general system metrics monitoring.
 ### USAGE
 
 ```
-$ pmm-admin add linux:metrics [NAME] [OPTIONS]
+$ ssm-admin add linux:metrics [NAME] [OPTIONS]
 ```
 
-This creates the `pmm-linux-metrics-42000` service that collects local system metrics for this particular OS instance.
+This creates the `ssm-linux-metrics-42000` service that collects local system metrics for this particular OS instance.
 
 !!! alert alert-info "Note"
-    It should be able to detect the local PMM Client name, but you can also specify it explicitly as an argument.
+    It should be able to detect the local SSM Client name, but you can also specify it explicitly as an argument.
 
 ### OPTIONS
 
@@ -268,17 +268,17 @@ The following option can be used with the `linux:metrics` alias:
 
 You can also use global options that apply to any other command, as well as options that apply to adding services in general.
 
-For more information, run **pmm-admin add** `linux:metrics --help`.
+For more information, run **ssm-admin add** `linux:metrics --help`.
 
 ## Extending metrics with textfile collector
 
 **Versionadded:** New in version 1.16.0.
 
-While PMM provides an excellent solution for system monitoring, sometimes you may have the need for a metric that’s not present in the list of `node_exporter` metrics out of the box. There is a simple method to extend the list of available metrics without modifying the `node_exporter` code. It is based on the textfile collector.
+While SSM provides an excellent solution for system monitoring, sometimes you may have the need for a metric that’s not present in the list of `node_exporter` metrics out of the box. There is a simple method to extend the list of available metrics without modifying the `node_exporter` code. It is based on the textfile collector.
 
-Starting from version 1.16.0, this collector is enabled for the `linux:metrics` in PMM Client by default.
+Starting from version 1.16.0, this collector is enabled for the `linux:metrics` in SSM Client by default.
 
-The default directory for reading text files with the metrics is `/usr/local/percona/pmm-client/textfile-collector`, and the exporter reads files from it with the `.prom` extension. By default it contains an example file  `example.prom` which has commented contents and can be used as a template.
+The default directory for reading text files with the metrics is `/opt/ss/ssm-client/textfile-collector`, and the exporter reads files from it with the `.prom` extension. By default it contains an example file  `example.prom` which has commented contents and can be used as a template.
 
 You are responsible for running a cronjob or other regular process to generate the metric series data and write it to this directory.
 
@@ -287,8 +287,8 @@ You are responsible for running a cronjob or other regular process to generate t
 This example will show you how to collect the number of running and stopped docker containers on a host. It uses a `crontab` task, set with the following lines in the cron configuration file (e.g. in `/etc/crontab`):
 
 ```
-*/1 * * * *     root   echo -n "" > /tmp/docker_all.prom; /usr/bin/docker ps -a | sed -n '1!p'| /usr/bin/wc -l | sed -ne 's/^/node_docker_containers_total /p' >> /usr/local/percona/pmm-client/docker_all.prom;
-*/1 * * * *     root   echo -n "" > /tmp/docker_running.prom; /usr/bin/docker ps | sed -n '1!p'| /usr/bin/wc -l | sed -ne 's/^/node_docker_containers_running_total /p' >>/usr/local/percona/pmm-client/docker_running.prom;
+*/1 * * * *     root   echo -n "" > /tmp/docker_all.prom; /usr/bin/docker ps -a | sed -n '1!p'| /usr/bin/wc -l | sed -ne 's/^/node_docker_containers_total /p' >> /opt/ss/ssm-client/docker_all.prom;
+*/1 * * * *     root   echo -n "" > /tmp/docker_running.prom; /usr/bin/docker ps | sed -n '1!p'| /usr/bin/wc -l | sed -ne 's/^/node_docker_containers_running_total /p' >>/opt/ss/ssm-client/docker_running.prom;
 ```
 
 The result of the commands is placed into the `docker_all.prom` and `docker_running.prom` files and read by exporter.
@@ -308,20 +308,20 @@ Use the `mysql:queries` alias to enable MySQL query analytics.
 ### USAGE
 
 ```
-pmm-admin add mysql:queries [NAME] [OPTIONS]
+ssm-admin add mysql:queries [NAME] [OPTIONS]
 ```
 
-This creates the `pmm-mysql-queries-0` service that is able to collect QAN data for multiple remote MySQL server instances.
+This creates the `ssm-mysql-queries-0` service that is able to collect QAN data for multiple remote MySQL server instances.
 
-The **pmm-admin add** command is able to detect the local PMM Client name, but you can also specify it explicitly as an argument.
+The **ssm-admin add** command is able to detect the local SSM Client name, but you can also specify it explicitly as an argument.
 
 !!! alert alert-warning "Important"
     If you connect MySQL Server version 8.0, make sure it is started with the `default_authentication_plugin` set to the value **mysql_native_password**.
 
-    You may alter your PMM user and pass the authentication plugin as a parameter:
+    You may alter your SSM user and pass the authentication plugin as a parameter:
 
     ```
-    mysql> ALTER USER pmm@'localhost' IDENTIFIED WITH mysql_native_password BY '$eCR8Tp@s$w*rD';
+    mysql> ALTER USER ssm@'localhost' IDENTIFIED WITH mysql_native_password BY '$eCR8Tp@s$w*rD';
     ```
 
 ### OPTIONS
@@ -329,7 +329,7 @@ The **pmm-admin add** command is able to detect the local PMM Client name, but y
 The following options can be used with the `mysql:queries` alias:
 
 `--create-user`
-: Create a dedicated MySQL user for PMM Client (named `pmm`).
+: Create a dedicated MySQL user for SSM Client (named `ssm`).
 
 `--create-user-maxconn`
 : Specify maximum connections for the dedicated MySQL user (default is 10).
@@ -344,7 +344,7 @@ The following options can be used with the `mysql:queries` alias:
 : Disable collection of query examples.
 
 `--slow-log-rotation`
-: Do not manage *slow log* files by using PMM. Set this option to *false* if you intend to manage *slow log* files by using a third party tool.  The default value is *true*
+: Do not manage *slow log* files by using SSM. Set this option to *false* if you intend to manage *slow log* files by using a third party tool.  The default value is *true*
 
 `--force`
 :     Force to create or update the dedicated MySQL user.
@@ -378,21 +378,21 @@ You can also use global options that apply to any other command, as well as opti
 
 ### DETAILED DESCRIPTION
 
-When adding the MySQL query analytics service, the **pmm-admin** tool will attempt to automatically detect the local MySQL instance and MySQL superuser credentials.  You can use options to provide this information, if it cannot be detected automatically.
+When adding the MySQL query analytics service, the **ssm-admin** tool will attempt to automatically detect the local MySQL instance and MySQL superuser credentials.  You can use options to provide this information, if it cannot be detected automatically.
 
-You can also specify the `--create-user` option to create a dedicated `pmm` user on the MySQL instance that you want to monitor. This user will be given all the necessary privileges for monitoring, and is recommended over using the MySQL superuser.
+You can also specify the `--create-user` option to create a dedicated `ssm` user on the MySQL instance that you want to monitor. This user will be given all the necessary privileges for monitoring, and is recommended over using the MySQL superuser.
 
 For example, to set up remote monitoring of QAN data on a MySQL server located at 192.168.200.2, use a command similar to the following:
 
 ```
-$ pmm-admin add mysql:queries --user root --password root --host 192.168.200.2 --create-user
+$ ssm-admin add mysql:queries --user root --password root --host 192.168.200.2 --create-user
 ```
 
 QAN can use either the *slow query log* or *Performance Schema* as the source. By default, it chooses the *slow query log* for a local MySQL instance and *Performance Schema* otherwise. For more information about the differences, see [Configuring Performance Schema](conf-mysql.md#configuring-performance-schema).
 
 You can explicitly set the query source when adding a QAN instance using the `--query-source` option.
 
-For more information, run **pmm-admin add** `mysql:queries --help`.
+For more information, run **ssm-admin add** `mysql:queries --help`.
 
 ## Adding MySQL metrics service
 
@@ -401,20 +401,20 @@ Use the `mysql:metrics` alias to enable MySQL metrics monitoring.
 ### USAGE
 
 ```
-$ pmm-admin add mysql:metrics [NAME] [OPTIONS]
+$ ssm-admin add mysql:metrics [NAME] [OPTIONS]
 ```
 
-This creates the `pmm-mysql-metrics-42002` service that collects MySQL instance metrics.
+This creates the `ssm-mysql-metrics-42002` service that collects MySQL instance metrics.
 
 !!! alert alert-info "Note"
-    It should be able to detect the local PMM Client name, but you can also specify it explicitly as an argument.
+    It should be able to detect the local SSM Client name, but you can also specify it explicitly as an argument.
 
 ### OPTIONS
 
 The following options can be used with the `mysql:metrics` alias:
 
 `--create-user`
-: Create a dedicated MySQL user for PMM Client (named `pmm`).
+: Create a dedicated MySQL user for SSM Client (named `ssm`).
 
 `--create-user-maxconn`
 : Specify maximum connections for the dedicated MySQL user (default is 10).
@@ -462,17 +462,17 @@ You can also use global options that apply to any other command, as well as opti
 
 ### DETAILED DESCRIPTION
 
-When adding the MySQL metrics monitoring service, the **pmm-admin** tool attempts to automatically detect the local MySQL instance and MySQL superuser credentials.  You can use options to provide this information, if it cannot be detected automatically.
+When adding the MySQL metrics monitoring service, the **ssm-admin** tool attempts to automatically detect the local MySQL instance and MySQL superuser credentials.  You can use options to provide this information, if it cannot be detected automatically.
 
-You can also specify the `--create-user` option to create a dedicated `pmm` user on the MySQL host that you want to monitor.  This user will be given all the necessary privileges for monitoring, and is recommended over using the MySQL superuser.
+You can also specify the `--create-user` option to create a dedicated `ssm` user on the MySQL host that you want to monitor.  This user will be given all the necessary privileges for monitoring, and is recommended over using the MySQL superuser.
 
 For example, to set up remote monitoring of MySQL metrics on a server located at 192.168.200.3, use a command similar to the following:
 
 ```
-$ pmm-admin add mysql:metrics --user root --password root --host 192.168.200.3 --create-user
+$ ssm-admin add mysql:metrics --user root --password root --host 192.168.200.3 --create-user
 ```
 
-For more information, run **pmm-admin add** `mysql:metrics` `--help`.
+For more information, run **ssm-admin add** `mysql:metrics` `--help`.
 
 ## Adding MongoDB query analytics service
 
@@ -481,13 +481,13 @@ Use the `mongodb:queries` alias to enable MongoDB query analytics.
 ### USAGE
 
 ```
-pmm-admin add mongodb:queries [NAME] [OPTIONS]
+ssm-admin add mongodb:queries [NAME] [OPTIONS]
 ```
 
-This creates the `pmm-mongodb-queries-0` service that is able to collect QAN data for multiple remote MongoDB server instances.
+This creates the `ssm-mongodb-queries-0` service that is able to collect QAN data for multiple remote MongoDB server instances.
 
 !!! alert alert-info "Note"
-    It should be able to detect the local PMM Client name, but you can also specify it explicitly as an argument.
+    It should be able to detect the local SSM Client name, but you can also specify it explicitly as an argument.
 
 ### OPTIONS
 
@@ -520,9 +520,9 @@ The following options can be used with the `mongodb:queries` alias:
 You can also use global options that apply to any other command, as well as options that apply to adding services in general.
 
 !!! alert alert-info "Note"
-    PMM does not support passing SSL/TLS related parameters to `mongodb:queries`.
+    SSM does not support passing SSL/TLS related parameters to `mongodb:queries`.
 
-For more information, run **pmm-admin add** `mongodb:queries` `--help`.
+For more information, run **ssm-admin add** `mongodb:queries` `--help`.
 
 ## Adding MongoDB metrics service
 
@@ -531,13 +531,13 @@ Use the `mongodb:metrics` alias to enable MongoDB metrics monitoring.
 ### USAGE
 
 ```
-$ pmm-admin add mongodb:metrics [NAME] [OPTIONS]
+$ ssm-admin add mongodb:metrics [NAME] [OPTIONS]
 ```
 
-This creates the `pmm-mongodb-metrics-42003` service that collects local MongoDB metrics for this particular MongoDB instance.
+This creates the `ssm-mongodb-metrics-42003` service that collects local MongoDB metrics for this particular MongoDB instance.
 
 !!! alert alert-info "Note"
-    It should be able to detect the local PMM Client name, but you can also specify it explicitly as an argument.
+    It should be able to detect the local SSM Client name, but you can also specify it explicitly as an argument.
 
 ### OPTIONS
 
@@ -557,16 +557,16 @@ The following options can be used with the `mongodb:metrics` alias:
 
 You can also use global options that apply to any other command, as well as options that apply to adding services in general.
 
-For more information, run **pmm-admin add** `mongodb:metrics` `--help`.
+For more information, run **ssm-admin add** `mongodb:metrics` `--help`.
 
 ### Monitoring a cluster
 
-When using PMM to monitor a cluster, you should enable monitoring for each instance by using the **pmm-admin add** command. This includes each member of replica sets in shards, mongos, and all configuration servers. Make sure that for each instance you supply the cluster name via the `--cluster` option and provide its URI via the `--uri` option.
+When using SSM to monitor a cluster, you should enable monitoring for each instance by using the **ssm-admin add** command. This includes each member of replica sets in shards, mongos, and all configuration servers. Make sure that for each instance you supply the cluster name via the `--cluster` option and provide its URI via the `--uri` option.
 
 Run this command as root or by using the **sudo** command. This examples uses *127.0.0.1* as a URL.
 
 ```
-$ pmm-admin add mongodb:metrics \
+$ ssm-admin add mongodb:metrics \
 --uri mongodb://127.0.0.1:<port>/admin <instance name> \
 --cluster <cluster name>
 ```
@@ -578,13 +578,13 @@ Use the `proxysql:metrics` alias to enable ProxySQL performance metrics monitori
 ### USAGE
 
 ```
-$ pmm-admin add proxysql:metrics [NAME] [OPTIONS]
+$ ssm-admin add proxysql:metrics [NAME] [OPTIONS]
 ```
 
-This creates the `pmm-proxysql-metrics-42004` service that collects local ProxySQL performance metrics.
+This creates the `ssm-proxysql-metrics-42004` service that collects local ProxySQL performance metrics.
 
 !!! alert alert-info "Note"
-    It should be able to detect the local PMM Client name, but you can also specify it explicitly as an argument.
+    It should be able to detect the local SSM Client name, but you can also specify it explicitly as an argument.
 
 ### OPTIONS
 
@@ -595,23 +595,23 @@ The following option can be used with the `proxysql:metrics` alias:
 
 You can also use global options that apply to any other command, as well as options that apply to adding services in general.
 
-For more information, run **pmm-admin add** `proxysql:metrics` `--help`.
+For more information, run **ssm-admin add** `proxysql:metrics` `--help`.
 
 ## Adding annotations
 
-Use the **pmm-admin annotate** command to set notifications about important application events and display them on all dashboards. By using annotations, you can conveniently analyze the impact of application events on your database.
+Use the **ssm-admin annotate** command to set notifications about important application events and display them on all dashboards. By using annotations, you can conveniently analyze the impact of application events on your database.
 
 ### USAGE
 
 Run this command as root or by using the **sudo** command
 
 ```
-$ pmm-admin annotate "Upgrade to v1.2" --tags "UX Imrovement,v1.2"
+$ ssm-admin annotate "Upgrade to v1.2" --tags "UX Imrovement,v1.2"
 ```
 
 ### OPTIONS
 
-The **pmm-admin annotate** supports the following options:
+The **ssm-admin annotate** supports the following options:
 
 `--tags`
 : Specify one or more tags applicable to the annotation that you are creating. Enclose your tags in quotes and separate individual tags by a comma, such as “tag 1,tag 2”.
@@ -620,19 +620,19 @@ You can also use global options that apply to any other command.
 
 ## Checking network connectivity
 
-Use the **pmm-admin check-network** command to run tests that verify connectivity between PMM Client and PMM Server.
+Use the **ssm-admin check-network** command to run tests that verify connectivity between SSM Client and SSM Server.
 
 ### USAGE
 
 Run this command as root or by using the **sudo** command
 
 ```
-pmm-admin check-network [OPTIONS]
+ssm-admin check-network [OPTIONS]
 ```
 
 ### OPTIONS
 
-The **pmm-admin check-network** command does not have its own options, but you can use global options that apply to any other command
+The **ssm-admin check-network** command does not have its own options, but you can use global options that apply to any other command
 
 ### DETAILED DESCRIPTION
 
@@ -640,32 +640,32 @@ Connection tests are performed both ways, with results separated accordingly:
 
 * `Client --> Server`
 
-    Pings Consul API, *PMM Query Analytics* API, and Prometheus API to make sure they are alive and reachable.
+    Pings Consul API, *SSM Query Analytics* API, and Prometheus API to make sure they are alive and reachable.
 
-    Performs a connection performance test to see the latency from PMM Client to PMM Server.
+    Performs a connection performance test to see the latency from SSM Client to SSM Server.
 
 * `Client <-- Server`
 
     Checks the status of Prometheus endpoints and makes sure it can scrape metrics from corresponding exporters.
 
-    Successful pings of PMM Server from PMM Client do not mean that Prometheus is able to scrape from exporters. If the output shows some endpoints in problem state, make sure that the corresponding service is running (see **pmm-admin list**). If the services that correspond to problematic endpoints are running, make sure that firewall settings on the PMM Client host allow incoming connections for corresponding ports.
+    Successful pings of SSM Server from SSM Client do not mean that Prometheus is able to scrape from exporters. If the output shows some endpoints in problem state, make sure that the corresponding service is running (see **ssm-admin list**). If the services that correspond to problematic endpoints are running, make sure that firewall settings on the SSM Client host allow incoming connections for corresponding ports.
 
 ### OUTPUT EXAMPLE
 
 ```
-$ pmm-admin check-network
-PMM Network Status
+$ ssm-admin check-network
+SSM Network Status
 
 Server Address | 192.168.100.1
 Client Address | 192.168.200.1
 
 * System Time
 NTP Server (0.pool.ntp.org)         | 2017-05-03 12:05:38 -0400 EDT
-PMM Server                          | 2017-05-03 16:05:38 +0000 GMT
-PMM Client                          | 2017-05-03 12:05:38 -0400 EDT
-PMM Server Time Drift               | OK
-PMM Client Time Drift               | OK
-PMM Client to PMM Server Time Drift | OK
+SSM Server                          | 2017-05-03 16:05:38 +0000 GMT
+SSM Client                          | 2017-05-03 12:05:38 -0400 EDT
+SSM Server Time Drift               | OK
+SSM Client Time Drift               | OK
+SSM Client to SSM Server Time Drift | OK
 
 * Connection: Client --> Server
 -------------------- -------------
@@ -687,37 +687,37 @@ linux:metrics    mongo-main  192.168.200.1:42000  OK       YES        -
 mongodb:metrics  mongo-main  192.168.200.1:42003  PROBLEM  YES        -
 ```
 
-For more information, run **pmm-admin check-network** `--help`.
+For more information, run **ssm-admin check-network** `--help`.
 
 ## Obtaining Diagnostics Data for Support
 
-PMM Client is able to generate a set of files for enhanced diagnostics, which is designed to be shared with Percona Support to solve an issue faster. This feature fetches logs, network, and the Percona Toolkit output. To perform data collection by PMM Client, execute:
+SSM Client is able to generate a set of files for enhanced diagnostics, which is designed to be shared with Shattered Silicon Support to solve an issue faster. This feature fetches logs, network, and the Percona Toolkit output. To perform data collection by SSM Client, execute:
 
 ```
-pmm-admin summary
+ssm-admin summary
 ```
 
-The output will be a tarball you can examine and/or attach to your Support ticket in the Percona’s [issue tracking system](https://jira.percona.com/projects/PMM/issues). The single file will look like this:
+The output will be a tarball you can examine. The single file will look like this:
 
 ```
 summary__2018_10_10_16_20_00.tar.gz
 ```
 
-## Configuring PMM Client
+## Configuring SSM Client
 
-Use the **pmm-admin config** command to configure how PMM Client communicates with PMM Server.
+Use the **ssm-admin config** command to configure how SSM Client communicates with SSM Server.
 
 ### USAGE
 
 Run this command as root or by using the **sudo** command.
 
 ```
-pmm-admin config [OPTIONS]
+ssm-admin config [OPTIONS]
 ```
 
 ### OPTIONS
 
-The following options can be used with the **pmm-admin config** command:
+The following options can be used with the **ssm-admin config** command:
 
 `--bind-address`
 : Specify the bind address, which is also the local (private) address mapped from client address via NAT or port forwarding By default, it is set to the client address.
@@ -732,10 +732,10 @@ The following options can be used with the **pmm-admin config** command:
 : Force to set the client name on initial setup after uninstall with unreachable server.
 
 `--server`
-: Specify the address of the PMM Server host. If necessary, you can also specify the port after colon, for example:
+: Specify the address of the SSM Server host. If necessary, you can also specify the port after colon, for example:
 
     ```
-    pmm-admin config --server 192.168.100.6:8080
+    ssm-admin config --server 192.168.100.6:8080
     ```
 
     By default, port 80 is used with SSL disabled, and port 443 when SSL is enabled.
@@ -744,28 +744,28 @@ The following options can be used with the **pmm-admin config** command:
 : Enable insecure SSL (self-signed certificate).
 
 `--server-password`
-: Specify the HTTP password configured on PMM Server.
+: Specify the HTTP password configured on SSM Server.
 
 `--server-ssl`
-: Enable SSL encryption for connection to PMM Server.
+: Enable SSL encryption for connection to SSM Server.
 
 `--server-user`
-: Specify the HTTP user configured on PMM Server (default is `pmm`).
+: Specify the HTTP user configured on SSM Server (default is `ssm`).
 
 You can also use global options that apply to any other command.
 
-For more information, run **pmm-admin config** –help.
+For more information, run **ssm-admin config** –help.
 
 ## Getting help for any command
 
-Use the **pmm-admin help** command to print help for any command.
+Use the **ssm-admin help** command to print help for any command.
 
 ### USAGE
 
 Run this command as root or by using the **sudo** command
 
 ```
-$ pmm-admin help [COMMAND]
+$ ssm-admin help [COMMAND]
 ```
 
 This will print help information and exit.  The actual command is not run and options are ignored.
@@ -777,37 +777,37 @@ This will print help information and exit.  The actual command is not run and op
 
 You can print help information for any command or service alias.
 
-## Getting information about PMM Client
+## Getting information about SSM Client
 
-Use the **pmm-admin info** command to print basic information about PMM Client.
+Use the **ssm-admin info** command to print basic information about SSM Client.
 
 ### USAGE
 
 Run this command as root or by using the **sudo** command
 
 ```
-pmm-admin info [OPTIONS]
+ssm-admin info [OPTIONS]
 ```
 
 ### OPTIONS
 
-The **pmm-admin info** command does not have its own options, but you can use global options that apply to any other command
+The **ssm-admin info** command does not have its own options, but you can use global options that apply to any other command
 
 ### OUTPUT
 
 The output provides the following information:
 
-* Version of **pmm-admin**
-* PMM Server host address, and local host name and address (this can be configured using **pmm-admin config**)
-* System manager that **pmm-admin** uses to manage PMM services
+* Version of **ssm-admin**
+* SSM Server host address, and local host name and address (this can be configured using **ssm-admin config**)
+* System manager that **ssm-admin** uses to manage SSM services
 * Go version and runtime information
 
 For example:
 
 ```
-$ pmm-admin info
+$ ssm-admin info
 
-PMM Server      | 192.168.100.1
+SSM Server      | 192.168.100.1
 Client Name     | ubuntu-amd64
 Client Address  | 192.168.200.1
 Service manager | linux-systemd
@@ -816,26 +816,26 @@ Go Version      | 1.8
 Runtime Info    | linux/amd64
 ```
 
-For more information, run **pmm-admin info** `--help`.
+For more information, run **ssm-admin info** `--help`.
 
 ## Listing monitoring services
 
-Use the **pmm-admin list** command to list all enabled services with details.
+Use the **ssm-admin list** command to list all enabled services with details.
 
 ### USAGE
 
 Run this command as root or by using the **sudo** command
 
 ```
-pmm-admin list [OPTIONS]
+ssm-admin list [OPTIONS]
 ```
 
 ### OPTIONS
 
-The **pmm-admin list** command supports global options that apply to any other command and also provides a machine friendly JSON output.
+The **ssm-admin list** command supports global options that apply to any other command and also provides a machine friendly JSON output.
 
 `--json`
-: list the enabled services as a JSON document. The information provided in the standard tabular form is captured as keys and values. The general information about the computer where PMM Client is installed is given as top level elements:
+: list the enabled services as a JSON document. The information provided in the standard tabular form is captured as keys and values. The general information about the computer where SSM Client is installed is given as top level elements:
 
     * `Version`
     * `ServerAddress`
@@ -855,21 +855,21 @@ The **pmm-admin list** command supports global options that apply to any other c
 
 The output provides the following information:
 
-* Version of **pmm-admin**
-* PMM Server host address, and local host name and address (this can be configured using **pmm-admin config**)
-* System manager that **pmm-admin** uses to manage PMM services
-* A table that lists all services currently managed by `pmm-admin`, with basic information about each service
+* Version of **ssm-admin**
+* SSM Server host address, and local host name and address (this can be configured using **ssm-admin config**)
+* System manager that **ssm-admin** uses to manage SSM services
+* A table that lists all services currently managed by `ssm-admin`, with basic information about each service
 
 For example, if you enable general OS and MongoDB metrics monitoring, output should be similar to the following:
 
 Run this command as root or by using the **sudo** command
 
 ```
-$ pmm-admin list
+$ ssm-admin list
 
 ...
 
-PMM Server      | 192.168.100.1
+SSM Server      | 192.168.100.1
 Client Name     | ubuntu-amd64
 Client Address  | 192.168.200.1
 Service manager | linux-systemd
@@ -881,77 +881,77 @@ linux:metrics    mongo-main  42000       YES      -
 mongodb:metrics  mongo-main  42003       YES      localhost:27017
 ```
 
-## Pinging PMM Server
+## Pinging SSM Server
 
-Use the **pmm-admin ping** command to verify connectivity with PMM Server.
+Use the **ssm-admin ping** command to verify connectivity with SSM Server.
 
 ### USAGE
 
 Run this command as root or by using the **sudo** command
 
 ```
-pmm-admin ping [OPTIONS]
+ssm-admin ping [OPTIONS]
 ```
 
 If the ping is successful, it returns `OK`.
 
 ```
-$ pmm-admin ping
-OK, PMM server is alive.
+$ ssm-admin ping
+OK, SSM server is alive.
 
-PMM Server      | 192.168.100.1 (insecure SSL, password-protected)
+SSM Server      | 192.168.100.1 (insecure SSL, password-protected)
 Client Name     | centos7.vm
 Client Address  | 192.168.200.1
 ```
 
 ### OPTIONS
 
-The **pmm-admin ping** command does not have its own options, but you can use global options that apply to any other command.
+The **ssm-admin ping** command does not have its own options, but you can use global options that apply to any other command.
 
-For more information, run **pmm-admin ping** `--help`.
+For more information, run **ssm-admin ping** `--help`.
 
 ## Purging metrics data
 
-Use the **pmm-admin purge** command to purge metrics data associated with a service on PMM Server. This is usually required after you remove a service and do not want its metrics data to show up on graphs.
+Use the **ssm-admin purge** command to purge metrics data associated with a service on SSM Server. This is usually required after you remove a service and do not want its metrics data to show up on graphs.
 
 ### USAGE
 
 Run this command as root or by using the **sudo** command
 
 ```
-pmm-admin purge [SERVICE [NAME]] [OPTIONS]
+ssm-admin purge [SERVICE [NAME]] [OPTIONS]
 ```
 
 !!! alert alert-info "Note"
-    It should be able to detect the local PMM Client name, but you can also specify it explicitly as an argument.
+    It should be able to detect the local SSM Client name, but you can also specify it explicitly as an argument.
 
 ### SERVICES
 
-Specify a monitoring service alias. To see which services are enabled, run **pmm-admin list**.
+Specify a monitoring service alias. To see which services are enabled, run **ssm-admin list**.
 
 ### OPTIONS
 
-The **pmm-admin purge** command does not have its own options, but you can use global options that apply to any other command
+The **ssm-admin purge** command does not have its own options, but you can use global options that apply to any other command
 
-For more information, run **pmm-admin purge** `--help`.
+For more information, run **ssm-admin purge** `--help`.
 
 ## Removing monitoring services
 
-Use the **pmm-admin rm** command to remove monitoring services.
+Use the **ssm-admin rm** command to remove monitoring services.
 
 ### USAGE
 
 Run this command as root or by using the **sudo** command
 
 ```
-pmm-admin rm [OPTIONS] [SERVICE]
+ssm-admin rm [OPTIONS] [SERVICE]
 ```
 
-When you remove a service, collected data remains in Metrics Monitor on PMM Server. To remove the collected data, use the **pmm-admin purge** command.
+When you remove a service, collected data remains in Metrics Monitor on SSM Server. To remove the collected data, use the **ssm-admin purge** command.
 
 ### OPTIONS
 
-The following option can be used with the **pmm-admin rm** command:
+The following option can be used with the **ssm-admin rm** command:
 
 `--all`
 : Remove all monitoring services.
@@ -960,66 +960,66 @@ You can also use global options that apply to any other command.
 
 ### SERVICES
 
-Specify a monitoring service alias. To see which services are enabled, run **pmm-admin list**.
+Specify a monitoring service alias. To see which services are enabled, run **ssm-admin list**.
 
 ### EXAMPLES
 
-* To remove all services enabled for this PMM Client:
+* To remove all services enabled for this SSM Client:
 
     ```
-    $ pmm-admin rm --all
+    $ ssm-admin rm --all
     ```
 
 * To remove all services related to MySQL:
 
     ```
-    $ pmm-admin rm mysql
+    $ ssm-admin rm mysql
     ```
 
 * To remove only `mongodb:metrics` service:
 
     ```
-    $ pmm-admin rm mongodb:metrics
+    $ ssm-admin rm mongodb:metrics
     ```
 
-For more information, run **pmm-admin rm** –help.
+For more information, run **ssm-admin rm** –help.
 
 ## Removing orphaned services
 
-Use the **pmm-admin repair** command to remove information about orphaned services from PMM Server. This can happen if you removed services locally while PMM Server was not available (disconnected or shut down), for example, using the **pmm-admin uninstall** command.
+Use the **ssm-admin repair** command to remove information about orphaned services from SSM Server. This can happen if you removed services locally while SSM Server was not available (disconnected or shut down), for example, using the **ssm-admin uninstall** command.
 
 ### USAGE
 
 Run this command as root or by using the **sudo** command
 
 ```
-$ pmm-admin repair [OPTIONS]
+$ ssm-admin repair [OPTIONS]
 ```
 
 ### OPTIONS
 
-The **pmm-admin repair** command does not have its own options, but you can use global options that apply to any other command.
+The **ssm-admin repair** command does not have its own options, but you can use global options that apply to any other command.
 
-For more information, run **pmm-admin repair** –help.
+For more information, run **ssm-admin repair** –help.
 
 ## Restarting monitoring services
 
-Use the **pmm-admin restart** command to restart services managed by this PMM Client. This is the same as running **pmm-admin stop** and **pmm-admin start**.
+Use the **ssm-admin restart** command to restart services managed by this SSM Client. This is the same as running **ssm-admin stop** and **ssm-admin start**.
 
 ### USAGE
 
 Run this command as root or by using the **sudo** command
 
 ```
-pmm-admin restart [SERVICE [NAME]] [OPTIONS]
+ssm-admin restart [SERVICE [NAME]] [OPTIONS]
 ```
 
 !!! alert alert-info "Note"
-    It should be able to detect the local PMM Client name, but you can also specify it explicitly as an argument.
+    It should be able to detect the local SSM Client name, but you can also specify it explicitly as an argument.
 
 ### OPTIONS
 
-The following option can be used with the **pmm-admin restart** command:
+The following option can be used with the **ssm-admin restart** command:
 
 `--all`
 
@@ -1029,54 +1029,54 @@ You can also use global options that apply to any other command.
 
 ### SERVICES
 
-Specify a monitoring service alias that you want to restart. To see which services are available, run **pmm-admin list**.
+Specify a monitoring service alias that you want to restart. To see which services are available, run **ssm-admin list**.
 
 ### EXAMPLES
 
-* To restart all available services for this PMM Client:
+* To restart all available services for this SSM Client:
 
     ```
-    # pmm-admin restart --all
+    # ssm-admin restart --all
     ```
 
 * To restart all services related to MySQL:
 
     ```
-    $ pmm-admin restart mysql
+    $ ssm-admin restart mysql
     ```
 
 * To restart only the `mongodb:metrics` service:
 
     ```
-    $ pmm-admin restart mongodb:metrics
+    $ ssm-admin restart mongodb:metrics
     ```
 
-For more information, run **pmm-admin restart** `--help`.
+For more information, run **ssm-admin restart** `--help`.
 
-## Getting passwords used by PMM Client
+## Getting passwords used by SSM Client
 
-Use the **pmm-admin show-passwords** command to print credentials stored in the configuration file (by default: `/usr/local/percona/pmm-client/pmm.yml`).
+Use the **ssm-admin show-passwords** command to print credentials stored in the configuration file (by default: `/opt/ss/ssm-client/ssm.yml`).
 
 ### USAGE
 
 Run this command as root or by using the **sudo** command
 
 ```
-pmm-admin show-passwords [OPTIONS]
+ssm-admin show-passwords [OPTIONS]
 ```
 
 ### OPTIONS
 
-The **pmm-admin show-passwords** command does not have its own options, but you can use global options that apply to any other command
+The **ssm-admin show-passwords** command does not have its own options, but you can use global options that apply to any other command
 
 ### OUTPUT
 
-This command prints HTTP authentication credentials and the password for the `pmm` user that is created on the MySQL instance if you specify the `--create-user` option when adding a service.
+This command prints HTTP authentication credentials and the password for the `ssm` user that is created on the MySQL instance if you specify the `--create-user` option when adding a service.
 
 Run this command as root or by using the **sudo** command
 
 ```
-$ pmm-admin show-passwords
+$ ssm-admin show-passwords
 HTTP basic authentication
 User     | aname
 Password | secr3tPASS
@@ -1085,26 +1085,26 @@ MySQL new user creation
 Password | g,3i-QR50tQJi9M1yl9-
 ```
 
-For more information, run **pmm-admin show-passwords**  `--help`.
+For more information, run **ssm-admin show-passwords**  `--help`.
 
 ## Starting monitoring services
 
-Use the **pmm-admin start** command to start services managed by this PMM Client.
+Use the **ssm-admin start** command to start services managed by this SSM Client.
 
 ### USAGE
 
 Run this command as root or by using the **sudo** command
 
 ```
-pmm-admin start [SERVICE [NAME]] [OPTIONS]
+ssm-admin start [SERVICE [NAME]] [OPTIONS]
 ```
 
 !!! alert alert-info "Note"
-    It should be able to detect the local PMM Client name, but you can also specify it explicitly as an argument.
+    It should be able to detect the local SSM Client name, but you can also specify it explicitly as an argument.
 
 ### OPTIONS
 
-The following option can be used with the **pmm-admin start** command:
+The following option can be used with the **ssm-admin start** command:
 
 `--all`
 : Start all monitoring services.
@@ -1113,48 +1113,48 @@ You can also use global options that apply to any other command.
 
 ### SERVICES
 
-Specify a monitoring service alias that you want to start. To see which services are available, run **pmm-admin list**.
+Specify a monitoring service alias that you want to start. To see which services are available, run **ssm-admin list**.
 
 ### EXAMPLES
 
-* To start all available services for this PMM Client:
+* To start all available services for this SSM Client:
 
     ```
-    $ pmm-admin start --all
+    $ ssm-admin start --all
     ```
 
 * To start all services related to MySQL:
 
     ```
-    $ pmm-admin start mysql
+    $ ssm-admin start mysql
     ```
 
 * To start only the `mongodb:metrics` service:
 
     ```
-    $ pmm-admin start mongodb:metrics
+    $ ssm-admin start mongodb:metrics
     ```
 
-For more information, run **pmm-admin start** `--help`.
+For more information, run **ssm-admin start** `--help`.
 
 ## Stopping monitoring services
 
-Use the **pmm-admin stop** command to stop services managed by this PMM Client.
+Use the **ssm-admin stop** command to stop services managed by this SSM Client.
 
 ### USAGE
 
 Run this command as root or by using the **sudo** command
 
 ```
-pmm-admin stop [SERVICE [NAME]] [OPTIONS]
+ssm-admin stop [SERVICE [NAME]] [OPTIONS]
 ```
 
 !!! alert alert-info "Note"
-    It should be able to detect the local PMM Client name, but you can also specify it explicitly as an argument.
+    It should be able to detect the local SSM Client name, but you can also specify it explicitly as an argument.
 
 ### OPTIONS
 
-The following option can be used with the **pmm-admin stop** command:
+The following option can be used with the **ssm-admin stop** command:
 
 `--all`
 : Stop all monitoring services.
@@ -1163,54 +1163,54 @@ You can also use global options that apply to any other command.
 
 ### SERVICES
 
-Specify a monitoring service alias that you want to stop. To see which services are available, run **pmm-admin list**.
+Specify a monitoring service alias that you want to stop. To see which services are available, run **ssm-admin list**.
 
 ### EXAMPLES
 
-* To stop all available services for this PMM Client:
+* To stop all available services for this SSM Client:
 
     ```
-    $ pmm-admin stop --all
+    $ ssm-admin stop --all
     ```
 
 * To stop all services related to MySQL:
 
     ```
-    $ pmm-admin stop mysql
+    $ ssm-admin stop mysql
     ```
 
 * To stop only the `mongodb:metrics` service:
 
     ```
-    $ pmm-admin stop mongodb:metrics
+    $ ssm-admin stop mongodb:metrics
     ```
 
-For more information, run **pmm-admin stop** `--help`.
+For more information, run **ssm-admin stop** `--help`.
 
 ## Cleaning Up Before Uninstall
 
-Use the **pmm-admin uninstall** command to remove all services even if PMM Server is not available.  To uninstall PMM correctly, you first need to remove all services, then uninstall PMM Client, and then stop and remove PMM Server.  However, if PMM Server is not available (disconnected or shut down), **pmm-admin rm** will not work.  In this case, you can use **pmm-admin uninstall** to force the removal of monitoring services enabled for PMM Client.
+Use the **ssm-admin uninstall** command to remove all services even if SSM Server is not available.  To uninstall SSM correctly, you first need to remove all services, then uninstall SSM Client, and then stop and remove SSM Server.  However, if SSM Server is not available (disconnected or shut down), **ssm-admin rm** will not work.  In this case, you can use **ssm-admin uninstall** to force the removal of monitoring services enabled for SSM Client.
 
 !!! alert alert-info "Note"
-    Information about services will remain in PMM Server, and it will not let you add those services again.  To remove information about orphaned services from PMM Server, once it is back up and available to PMM Client, use the **pmm-admin repair** command.
+    Information about services will remain in SSM Server, and it will not let you add those services again.  To remove information about orphaned services from SSM Server, once it is back up and available to SSM Client, use the **ssm-admin repair** command.
 
 ### USAGE
 
 Run this command as root or by using the **sudo** command
 
 ```
-pmm-admin uninstall [OPTIONS]
+ssm-admin uninstall [OPTIONS]
 ```
 
 ### OPTIONS
 
-The **pmm-admin uninstall** command does not have its own options, but you can use global options that apply to any other command.
+The **ssm-admin uninstall** command does not have its own options, but you can use global options that apply to any other command.
 
-For more information, run **pmm-admin uninstall** `--help`.
+For more information, run **ssm-admin uninstall** `--help`.
 
 ## Monitoring Service Aliases
 
-The following aliases are used to designate PMM services that you want to add, remove, restart, start, or stop:
+The following aliases are used to designate SSM services that you want to add, remove, restart, start, or stop:
 
 | Alias              | Services                                                                                    |
 | ------------------ | ------------------------------------------------------------------------------------------- |

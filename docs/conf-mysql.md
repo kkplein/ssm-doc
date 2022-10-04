@@ -1,8 +1,8 @@
 # Configuring MySQL for Best Results
 
-PMM supports all commonly used variants of MySQL, including Percona Server, MariaDB, and Amazon RDS.  To prevent data loss and performance issues, PMM does not automatically change MySQL configuration. However, there are certain recommended settings that help maximize monitoring efficiency. These recommendations depend on the variant and version of MySQL you are using, and mostly apply to very high loads.
+SSM supports all commonly used variants of MySQL, including Percona Server, MariaDB, and Amazon RDS.  To prevent data loss and performance issues, SSM does not automatically change MySQL configuration. However, there are certain recommended settings that help maximize monitoring efficiency. These recommendations depend on the variant and version of MySQL you are using, and mostly apply to very high loads.
 
-PMM can collect query data either from the *slow query log* or from *Performance Schema*.  The *slow query log* provides maximum details, but can impact performance on heavily loaded systems. On Percona Server the query sampling feature may reduce the performance impact.
+SSM can collect query data either from the *slow query log* or from *Performance Schema*.  The *slow query log* provides maximum details, but can impact performance on heavily loaded systems. On Percona Server the query sampling feature may reduce the performance impact.
 
 *Performance Schema* is generally better for recent versions of other MySQL variants. For older MySQL variants, which have neither sampling, nor *Performance Schema*, configure logging only slow queries.
 
@@ -53,32 +53,32 @@ The following sample configurations can be used depending on the variant and ver
     log_slow_slave_statements=ON
     ```
 
-## Creating a MySQL User Account to Be Used with PMM
+## Creating a MySQL User Account to Be Used with SSM
 
 When adding a MySQL instance to monitoring, you can specify the MySQL server superuser account credentials.  However, monitoring with the superuser account is not secure. If you also specify the `--create-user` option, it will create a user with only the necessary privileges for collecting data.
 
-You can also set up the `pmm` user manually with necessary privileges and pass its credentials when adding the instance.
+You can also set up the `ssm` user manually with necessary privileges and pass its credentials when adding the instance.
 
 To enable complete MySQL instance monitoring, a command similar to the following is recommended:
 
 ```
-$ sudo pmm-admin add mysql --user root --password root --create-user
+$ sudo ssm-admin add mysql --user root --password root --create-user
 ```
 
-The superuser credentials are required only to set up the `pmm` user with necessary privileges for collecting data.  If you want to create this user yourself, the following privileges are required:
+The superuser credentials are required only to set up the `ssm` user with necessary privileges for collecting data.  If you want to create this user yourself, the following privileges are required:
 
 ```
-GRANT SELECT, PROCESS, SUPER, REPLICATION CLIENT, RELOAD ON *.* TO 'pmm'@' localhost' IDENTIFIED BY 'pass' WITH MAX_USER_CONNECTIONS 10;
-GRANT SELECT, UPDATE, DELETE, DROP ON performance_schema.* TO 'pmm'@'localhost';
+GRANT SELECT, PROCESS, SUPER, REPLICATION CLIENT, RELOAD ON *.* TO 'ssm'@' localhost' IDENTIFIED BY 'pass' WITH MAX_USER_CONNECTIONS 10;
+GRANT SELECT, UPDATE, DELETE, DROP ON performance_schema.* TO 'ssm'@'localhost';
 ```
 
-If the `pmm` user already exists, simply pass its credential when you add the instance:
+If the `ssm` user already exists, simply pass its credential when you add the instance:
 
 ```
-$ sudo pmm-admin add mysql --user pmm --password pass
+$ sudo ssm-admin add mysql --user ssm --password pass
 ```
 
-For more information, run as root **pmm-admin add** `mysql --help`.
+For more information, run as root **ssm-admin add** `mysql --help`.
 
 ## Configuring the slow query log in Percona Server
 
@@ -103,7 +103,7 @@ By default, slow query log settings apply only to new sessions.  If you want to 
 
 ## Configuring Performance Schema
 
-The default source of query data for PMM is the *slow query log*.  It is available in MySQL 5.1 and later versions.  Starting from MySQL 5.6 (including Percona Server 5.6 and later), you can choose to parse query data from the *Performance Schema* instead of *slow query log*.  Starting from MySQL 5.6.6, *Performance Schema* is enabled by default.
+The default source of query data for SSM is the *slow query log*.  It is available in MySQL 5.1 and later versions.  Starting from MySQL 5.6 (including Percona Server 5.6 and later), you can choose to parse query data from the *Performance Schema* instead of *slow query log*.  Starting from MySQL 5.6.6, *Performance Schema* is enabled by default.
 
 *Performance Schema* is not as data-rich as the *slow query log*, but it has all the critical data and is generally faster to parse. If you are not running Percona Server (which supports sampling for the slow query log), then *Performance Schema* is a better alternative.
 
@@ -168,21 +168,21 @@ mysql> select * from setup_consumers;
 
 If the instance is already running, configure the QAN agent to collect data from *Performance Schema*:
 
-1. Open the *PMM Query Analytics* dashboard.
+1. Open the *SSM Query Analytics* dashboard.
 2. Click the Settings button.
 3. Open the Settings section.
 4. Select `Performance Schema` in the Collect from drop-down list.
 5. Click Apply to save changes.
 
-If you are adding a new monitoring instance with the **pmm-admin** tool, use the `--query-source` *perfschema* option:
+If you are adding a new monitoring instance with the **ssm-admin** tool, use the `--query-source` *perfschema* option:
 
 Run this command as root or by using the **sudo** command
 
 ```
-pmm-admin add mysql --user root --password root --create-user --query-source perfschema
+ssm-admin add mysql --user root --password root --create-user --query-source perfschema
 ```
 
-For more information, run **pmm-admin add** `mysql --help`.
+For more information, run **ssm-admin add** `mysql --help`.
 
 
 
@@ -197,7 +197,7 @@ For more information, run **pmm-admin add** `mysql --help`.
 
 ## Use **logrotate** instead of the slow log rotation feature to manage the MySQL Slow Log
 
-By default, PMM manages the slow log for the added MySQL monitoring service on the computer where PMM Client is installed. This example demonstrates how to substitute **logrotate** for this default behavior.
+By default, SSM manages the slow log for the added MySQL monitoring service on the computer where SSM Client is installed. This example demonstrates how to substitute **logrotate** for this default behavior.
 
 ## Disable the default behavior of the slow log rotation
 
@@ -208,26 +208,26 @@ For this, set the `--slow-log-rotation` to *false*.
 Run this command as root or by using the **sudo** command
 
 ```
-pmm-admin rm mysql:queries
-pmm-admin add mysql:queries --slow-log-rotation=false
+ssm-admin rm mysql:queries
+ssm-admin add mysql:queries --slow-log-rotation=false
 ```
 
-On PMM Server, you can check the value of the Slow logs rotation field on the QAN Settings page. It should be *OFF*.
+On SSM Server, you can check the value of the Slow logs rotation field on the QAN Settings page. It should be *OFF*.
 
-On PMM Client (the host where you ran **pmm-admin add** command to add the MySQL monitoring service), use the **pmm-admin list** command to determine if the *slow log* rotation is disabled.
+On SSM Client (the host where you ran **ssm-admin add** command to add the MySQL monitoring service), use the **ssm-admin list** command to determine if the *slow log* rotation is disabled.
 
 ```
-$ pmm-admin list
+$ ssm-admin list
 
-PMM Server      | 127.0.0.1
-Client Name     | percona
+SSM Server      | 127.0.0.1
+Client Name     | ssm
 Client Address  | 172.17.0.1
 Service Manager | linux-systemd
 
 -------------- -------- ----------- -------- ------------------------------------------- --------------------------------------------------------------------------------------
 SERVICE TYPE   NAME     LOCAL PORT  RUNNING  DATA SOURCE                                 OPTIONS
 -------------- -------- ----------- -------- ------------------------------------------- --------------------------------------------------------------------------------------
-mysql:queries  percona  -           YES      root:***@unix(/var/run/mysqld/mysqld.sock)  query_source=slowlog, query_examples=true, slow_log_rotation=false, retain_slow_logs=1
+mysql:queries  ssm      -           YES      root:***@unix(/var/run/mysqld/mysqld.sock)  query_source=slowlog, query_examples=true, slow_log_rotation=false, retain_slow_logs=1
 ```
 
 ## Set up **logrotate** to manage the slow log rotation
@@ -242,7 +242,7 @@ Run this command as root or by using the **sudo** command
 $ logrotate CONFIG_FILE
 ```
 
-*CONFIG_FILE* is a placeholder for a configuration file that you should supply to **logrotate** as a mandatory parameter. To use **logrotate** to manage the *slow log* for PMM, you may supply a file with the following contents.
+*CONFIG_FILE* is a placeholder for a configuration file that you should supply to **logrotate** as a mandatory parameter. To use **logrotate** to manage the *slow log* for SSM, you may supply a file with the following contents.
 
 This is a basic example of **logrotate** for the MySQL slow logs at 1G for 30 copies (30GB).
 
@@ -284,28 +284,28 @@ For more information about how to use **logrotate**, refer to its documentation 
 
 
 
-## Configuring MySQL 8.0 for PMM
+## Configuring MySQL 8.0 for SSM
 
 MySQL 8 (in version 8.0.4) changes the way clients are authenticated by default. The `default_authentication_plugin` parameter is set to `caching_sha2_password`. This change of the default value implies that MySQL drivers must support the SHA-256 authentication. Also, the communication channel with MySQL 8 must be encrypted when using `caching_sha2_password`.
 
-The MySQL driver used with PMM does not yet support the SHA-256 authentication.
+The MySQL driver used with SSM does not yet support the SHA-256 authentication.
 
-With currently supported versions of MySQL, PMM requires that a dedicated MySQL user be set up. This MySQL user should be authenticated using the `mysql_native_password` plugin.  Although MySQL is configured to support SSL clients, connections to MySQL Server are not encrypted.
+With currently supported versions of MySQL, SSM requires that a dedicated MySQL user be set up. This MySQL user should be authenticated using the `mysql_native_password` plugin.  Although MySQL is configured to support SSL clients, connections to MySQL Server are not encrypted.
 
-There are two workarounds to be able to add MySQL Server version 8.0.4 or higher as a monitoring service to PMM:
+There are two workarounds to be able to add MySQL Server version 8.0.4 or higher as a monitoring service to SSM:
 
-1. Alter the MySQL user that you plan to use with PMM
+1. Alter the MySQL user that you plan to use with SSM
 2. Change the global MySQL configuration
 
 ### Altering the MySQL User
 
-Provided you have already created the MySQL user that you plan to use with PMM, alter this user as follows:
+Provided you have already created the MySQL user that you plan to use with SSM, alter this user as follows:
 
 ```
-mysql> ALTER USER pmm@'localhost' IDENTIFIED WITH mysql_native_password BY '$eCR8Tp@s$w*rD';
+mysql> ALTER USER ssm@'localhost' IDENTIFIED WITH mysql_native_password BY '$eCR8Tp@s$w*rD';
 ```
 
-Then, pass this user to `pmm-admin add` as the value of the `--user` parameter.
+Then, pass this user to `ssm-admin add` as the value of the `--user` parameter.
 
 This is a preferred approach as it only weakens the security of one user.
 
@@ -361,7 +361,7 @@ To enable collection of query response time:
 
 ## Executing Custom Queries
 
-Starting from the version 1.15.0, PMM provides user the ability to take a SQL `SELECT` statement and turn the result set into metric series in PMM. The queries are executed at the LOW RESOLUTION level, which by default is every 60 seconds. A key advantage is that you can extend PMM to profile metrics unique to your environment (see users table example below), or to introduce support for a table that isn’t part of PMM yet. This feature is on by default and only requires that you edit the configuration file and use vaild YAML syntax. The default configuration file location is `/usr/local/percona/pmm-client/queries-mysqld.yml`.
+Starting from the version 1.15.0, SSM provides user the ability to take a SQL `SELECT` statement and turn the result set into metric series in SSM. The queries are executed at the LOW RESOLUTION level, which by default is every 60 seconds. A key advantage is that you can extend SSM to profile metrics unique to your environment (see users table example below), or to introduce support for a table that isn’t part of SSM yet. This feature is on by default and only requires that you edit the configuration file and use vaild YAML syntax. The default configuration file location is `/opt/ss/ssm-client/queries-mysqld.yml`.
 
 ### Example - Application users table
 
@@ -369,7 +369,7 @@ We’re going to take a users table of upvotes and downvotes and turn this into 
 
 #### Browsing metrics series using Advanced Data Exploration Dashboard
 
-Lets look at the output so we understand the goal - take data from a MySQL table and store in PMM, then display as a metric series. Using the Advanced Data Exploration Dashboard you can review your metric series.
+Lets look at the output so we understand the goal - take data from a MySQL table and store in SSM, then display as a metric series. Using the Advanced Data Exploration Dashboard you can review your metric series.
 
 #### MySQL table
 
@@ -443,8 +443,8 @@ app1_users_metrics:
 This custom query description should be placed in a YAML file (`queries-mysqld.yml` by default) on the corresponding server with MySQL.
 
 
-In order to modify the location of the queries file, for example if you have multiple mysqld instances per server, you need to explicitly identify to the PMM Server MySQL with the `pmm-admin add` command after the double dash:
+In order to modify the location of the queries file, for example if you have multiple mysqld instances per server, you need to explicitly identify to the SSM Server MySQL with the `ssm-admin add` command after the double dash:
 
 ```
-pmm-admin add mysql:metrics ... -- --queries-file-name=/usr/local/percona/pmm-client/query.yml
+ssm-admin add mysql:metrics ... -- --queries-file-name=/opt/ss/ssm-client/query.yml
 ```

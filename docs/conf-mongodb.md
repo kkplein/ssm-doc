@@ -1,6 +1,6 @@
-# Configuring MongoDB for Monitoring in PMM Query Analytics
+# Configuring MongoDB for Monitoring in SSM Query Analytics
 
-In QAN, you can monitor MongoDB metrics and MongoDB queries with the `mongodb:metrics` or `mongodb:queries` monitoring services accordingly. Run the **pmm-admin add** command to use these monitoring services (for more information, see [Adding monitoring services](pmm-admin.md)).
+In QAN, you can monitor MongoDB metrics and MongoDB queries with the `mongodb:metrics` or `mongodb:queries` monitoring services accordingly. Run the **ssm-admin add** command to use these monitoring services (for more information, see [Adding monitoring services](ssm-admin.md)).
 
 ## Supported versions of MongoDB
 
@@ -43,7 +43,7 @@ db.getSiblingDB("admin").createUser({
 })
 ```
 
-Then, you need to pass the user name and password in the value of the `--uri` option when adding the `mongodb:metrics` monitoring service in the **pmm-admin add** command:
+Then, you need to pass the user name and password in the value of the `--uri` option when adding the `mongodb:metrics` monitoring service in the **ssm-admin add** command:
 
 Run this command as root or by using the **sudo** command.
 
