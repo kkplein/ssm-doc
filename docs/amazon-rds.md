@@ -63,6 +63,8 @@ To define a new policy use the IAM page at AWS.
                     "rds:DescribeDBParameters",
                     "rds:DescribeDBLogFiles",
                     "rds:DownloadDBLogFilePortion",
+                    "rds:DescribeDBClusters",
+                    "rds:DescribeDBClusterParameters",
                     "cloudwatch:GetMetricStatistics",
                     "cloudwatch:ListMetrics"
                 ],
