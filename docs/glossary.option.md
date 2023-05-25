@@ -186,8 +186,10 @@ The `DISABLE_UPDATES` option removes the Update button from the interface and pr
 
 To set the filter for remote mysql instances/RDS instances that are added on the server side, you can set up the QAN_FILTER_OMIT environment variable when you create the runtime container like this:
 
-...
+```
 $ docker run ... -e QAN_FILTER_OMIT=COMMIT,RESET,PING,PREPARE,ROLLBACK,SET ... shatteredsilicon/ssm-server
-...
+```
 
 This will set up the default filter for all the mysql instances/RDS instances added on the server side. After you have added the instance, you can go to the SSM Query Analytics Setting.
+
+![Screenshot of SSM query analytics settings](/ssm-doc/blob/1.x/docs/_images/ssm_query_analytics_settings.png)
