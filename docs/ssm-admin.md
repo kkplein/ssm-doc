@@ -474,6 +474,20 @@ $ ssm-admin add mysql:metrics --user root --password root --host 192.168.200.3 -
 
 For more information, run **ssm-admin add** `mysql:metrics` `--help`.
 
+## Adding query filtering
+
+This requires adding on the server side first, see notes in (glossary.option.md).
+
+To set the filter for MySQL instances that are on the client side (with the **ssm-admin** tool), you can pass the `--qan-filter-omit` argument when you run `ssm-admin add mysql ...`, like this:
+
+```
+ssm-admin add mysql ... --qan-filter-omit COMMIT,RESET,PING,PREPARE,ROLLBACK,SET
+```
+
+After you have added the instance, you can also go to the SSM Query Analytics Settings page to adjust the filter.
+
+The default value of the filter is empty, case insensitive, and it should be comma separated when you set it up - for all `QAN_FILTER_OMIT` environment variables, `--qan-filter-omit` argument and the filter option on the SSM Query Analytics Settings page. 
+
 ## Adding MongoDB query analytics service
 
 Use the `mongodb:queries` alias to enable MongoDB query analytics.
