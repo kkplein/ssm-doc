@@ -192,4 +192,4 @@ $ docker run ... -e QAN_FILTER_OMIT=COMMIT,RESET,PING,PREPARE,ROLLBACK,SET ... s
 
 This will set up the default filter for all the mysql instances/RDS instances added on the server side. After you have added the instance, you can go to the SSM Query Analytics Setting.
 
-![Screenshot of SSM query analytics settings](/../_images/ssm_query_analytics_settings.png)
+![Screenshot of SSM query analytics settings](/ssm-doc/blob/1.x/docs/_images/ssm_query_analytics_settings.png)
