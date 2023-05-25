@@ -476,8 +476,6 @@ For more information, run **ssm-admin add** `mysql:metrics` `--help`.
 
 ## Adding query filtering
 
-This requires adding on the server side first, see notes in (glossary.option.md).
-
 To set the filter for MySQL instances that are on the client side (with the **ssm-admin** tool), you can pass the `--qan-filter-omit` argument when you run `ssm-admin add mysql ...`, like this:
 
 ```
