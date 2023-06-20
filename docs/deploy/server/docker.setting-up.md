@@ -27,7 +27,7 @@ $ docker create \
    -v /var/lib/mysql \
    -v /var/lib/grafana \
    --name ssm-data \
-   percona/ssm-server:1 /bin/true
+   shatteredsilicon/ssm-server:latest /bin/true
 ```
 
 !!! alert alert-info "Note"
@@ -54,7 +54,7 @@ $ docker run -d \
    --volumes-from ssm-data \
    --name ssm-server \
    --restart always \
-   percona/ssm-server:1
+   shatteredsilicon/ssm-server:latest
 ```
 
 This command does the following:
@@ -71,7 +71,7 @@ This command does the following:
 
 To install specific SSM Server version instead of the latest one, just put desired version number after the colon. Also in this scenario it may be useful to [prevent updating SSM Server via the web interface](../../glossary.option.md) with the `DISABLE_UPDATES` docker option.
 
-For example, installing version 1.14.1 with disabled update button in the web interface would look as follows:
+For example, installing version 8.7.1 with disabled update button in the web interface would look as follows:
 
 ```
 $ docker create \
@@ -80,7 +80,7 @@ $ docker create \
    -v /var/lib/mysql \
    -v /var/lib/grafana \
    --name ssm-data \
-   percona/ssm-server:1.14.1 /bin/true
+   shatteredsilicon/ssm-server:latest /bin/true
 
 $ docker run -d \
    -p 80:80 \
@@ -88,7 +88,7 @@ $ docker run -d \
    --name ssm-server \
    -e DISABLE_UPDATES=true \
    --restart always \
-   percona/ssm-server:1.14.1
+   shatteredsilicon/ssm-server:latest:8.7.1
 ```
 
 ## Additional options
