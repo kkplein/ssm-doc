@@ -1,8 +1,8 @@
 # VMware Workstation Player
 
-The following procedure describes how to run the *PMM Server* appliance using VMware Workstation Player:
+The following procedure describes how to run the *SSM Server* appliance using VMware Workstation Player:
 
-1. Download the OVA. The latest version is available at the [Download Percona Monitoring and Management](https://www.percona.com/downloads/pmm) site.
+1. Download the OVA. The latest version is available at the [Downloads](https://dl.shatteredsilicon.net/ssm/) site.
 
 2. Import the appliance.
 
@@ -16,8 +16,8 @@ The following procedure describes how to run the *PMM Server* appliance using VM
 
     If you are running the appliance on a host with properly configured network settings, select **Bridged** in the **Network connection** section of the appliance settings.
 
-4. Start the PMM Server appliance and set the root password (required on the first login)
+4. Start the SSM Server appliance and set the root password (required on the first login)
 
-    If it was assigned an IP address on the network by DHCP, the URL for accessing PMM will be printed in the console window.
+    If it was assigned an IP address on the network by DHCP, the URL for accessing SSM will be printed in the console window.
 
 5. Set the root password.
