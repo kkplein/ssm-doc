@@ -302,7 +302,7 @@ There are two workarounds to be able to add MySQL Server version 8.0.4 or higher
 Provided you have already created the MySQL user that you plan to use with SSM, alter this user as follows:
 
 ```
-mysql> ALTER USER ssm@'localhost' IDENTIFIED WITH mysql_native_password BY '$eCR8Tp@s$w*rD';
+mysql> ALTER USER 'ssm'@'localhost' IDENTIFIED WITH mysql_native_password BY 'your_new_password';
 ```
 
 Then, pass this user to `ssm-admin add` as the value of the `--user` parameter.
