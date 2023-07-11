@@ -1,9 +1,6 @@
-# Installing PMM Client on Debian or Ubuntu
+# Installing SSM Client on Debian or Ubuntu
 
-If you are running a DEB-based Linux distribution, use the **apt** package
-manager to install PMM Client from the official Percona software repository.
-
-Percona provides `.deb` packages for 64-bit versions of the following
+Shattered Silicon provides `.deb` packages for 64-bit versions of the following
 distributions:
 
 
@@ -28,17 +25,18 @@ distributions:
 * Ubuntu 18.04 (Bionic Beaver)
 
 !!! alert alert-info "Note"
-    PMM Client should work on other DEB-based distributions, but it is tested only on the platforms listed above.
+    SSM Client should work on other DEB-based distributions, but it is tested only on the platforms listed above.
 
-To install the PMM Client package, complete the following procedure. Run the following commands as root or by using the **sudo** command:
+To install the SSM Client package, complete the following procedure. Run the following commands as root or by using the **sudo** command:
 
-1. Configure Percona repositories as described in [Percona Software Repositories Documentation](https://www.percona.com/doc/percona-repo-config/index.html).
-
-2. Install the PMM Client package:
+1. Go to the [SSM download page](https://dl.shatteredsilicon.net/ssm/8/), download the appropriate version of SSM client for your GNU/Linux distribution
 
 ```
-$ apt-get install pmm-client
+$ curl -O https://dl.shatteredsilicon.net/ssm/8/DEBS/ssm-client_8.7.1.17.5.2-1_amd64.deb
 ```
 
-!!! alert alert-info "Note"
-    You can also download PMM Client packages from the [PMM download page](https://www.percona.com/downloads/pmm/). Choose the appropriate PMM version and your GNU/Linux distribution in two pop-up menus to get the download link (e.g. *Percona Monitoring and Management 1.17.2* and *Ubuntu 18.04 (Bionic Beaver*).
+2. Install the SSM Client package:
+
+```
+$ dpkg -i ssm-client_8.7.1.17.5.2-1_amd64.deb
+```

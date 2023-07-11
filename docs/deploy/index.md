@@ -1,6 +1,6 @@
-# Deploying Percona Monitoring and Management
+# Deploying Shattered Silicon Monitoring
 
-PMM is designed to be scalable for various environments.  If you have just one MySQL or MongoDB server, you can install and run both server and  clients on one database host.
+SSM is designed to be scalable for various environments.  If you have just one MySQL or MongoDB server, you can install and run both server and clients on one database host.
 
 It is more typical to have several MySQL and MongoDB server instances distributed over different hosts. In this case, you need to install the client package on each database host that you want to monitor. In this scenario, the  server is set up on a dedicated monitoring host.
 
@@ -8,71 +8,67 @@ In this chapter
 
 [TOC]
 
-## Installing PMM Server
+## Installing SSM Server
 
-To install and set up the PMM Server, use one of the following options:
+To install and set up the SSM Server, use one of the following options:
 
-* [Running PMM Server via Docker](server/docker.md)
-* [PMM Server as a Virtual Appliance](server/virtual-appliance.md)
-* [Running PMM Server Using AWS Marketplace](server/ami.md)
+* [Running SSM Server via Docker](server/docker.md)
 
 !!! important
-    On each computer where PMM Client is installed, the [following ports](../glossary.terminology.md#ports) must be open. These are default ports that you can change when adding the respective monitoring service with the `pmm-admin add` command.
+    On each computer where SSM Client is installed, the [following ports](../glossary.terminology.md#ports) must be open. These are default ports that you can change when adding the respective monitoring service with the `ssm-admin add` command.
 
     !!! seealso "See also"
         Improving security
-        : [Security Features in Percona Monitoring and Management](../security.md)
+        : [Security Features in Shattered Silicon Monitoring](../security.md)
 
-### Verifying PMM Server
+### Verifying SSM Server
 
-In your browser, go to the server by its IP address. If you run your server as a virtual appliance or by using an Amazon machine image, you will need to setup the user name, password and your public key if you intend to connect to the server by using ssh. This step is not needed if you run PMM Server using Docker.
+In your browser, go to the server by its IP address. If you run your server as a virtual appliance or by using an Amazon machine image, you will need to setup the user name, password and your public key if you intend to connect to the server by using ssh. This step is not needed if you run SSM Server using Docker.
 
 In the given example, you would need to direct your browser to *http://192.168.100.1*. Since you have not added any monitoring services yet, the site will not show any data.
 
-You can also check if PMM Server is available requesting the /ping URL as in the following example:
+You can also check if SSM Server is available requesting the /ping URL as in the following example:
 
 ```
 $ curl http://192.168.100.1/ping
-{'version': '1.8.0'}
+{'version': '8.7.1.17.5.2'}
 ```
 
 ## Installing Clients
 
-PMM Client is a package of agents and exporters installed on a database host that you want to monitor. Before installing the PMM Client package on each database host that you intend to monitor, make sure that your PMM Server host is accessible.
+SSM Client is a package of agents and exporters installed on a database host that you want to monitor. Before installing the SSM Client package on each database host that you intend to monitor, make sure that your SSM Server host is accessible.
 
-For example, you can run the **ping** command passing the IP address of the computer that PMM Server is running on. For example:
+For example, you can run the **ping** command passing the IP address of the computer that SSM Server is running on. For example:
 
 ```
 $ ping 192.168.100.1
 ```
 
-You will need to have root access on the database host where you will be installing PMM Client (either logged in as a user with root privileges or be able to run commands with **sudo**).
+You will need to have root access on the database host where you will be installing SSM Client (either logged in as a user with root privileges or be able to run commands with **sudo**).
 
 ### Supported platforms
 
-PMM Client should run on any modern Linux 64-bit distribution, however Percona provides PMM Client packages for automatic installation from software repositories only on the most popular Linux distributions:
+SSM Client should run on any modern Linux 64-bit distribution, however Shattered Silicon provides SSM Client packages for automatic installation from software repositories only on the most popular Linux distributions:
 
-* [DEB packages for Debian based distributions such as Ubuntu](#installing-pmm-client-on-debian-or-ubuntu)
-* [RPM packages for Red Hat based distributions such as CentOS](#installing-the-pmm-client-package-on-red-hat-and-centos)
+* [DEB packages for Debian based distributions such as Ubuntu](#installing-ssm-client-on-debian-or-ubuntu)
+* [RPM packages for Red Hat based distributions such as CentOS](#installing-the-ssm-client-package-on-red-hat-and-centos)
 
-It is recommended that you install your  client by using the software repository for your system. If this option does not work for you, Percona provides downloadable PMM Client packages from the [Download Percona Monitoring and Management](https://www.percona.com/downloads/pmm-client) page.
+It is recommended that you install your  client by using the software repository for your system. If this option does not work for you, Shattered Silicon provides downloadable SSM Client packages from the [Download Shattered Silicon Monitoring](https://dl.shatteredsilicon.net/ssm/8/) page.
 
 In addition to DEB and RPM packages, this site also offers:
 
 * Generic tarballs that you can extract and run the included `install` script.
-* Source code tarball to build your PMM client from source.
+* Source code tarball to build your SSM client from source.
 
-**WARNING**: You should not install agents on database servers that have the same host name, because host names are used by PMM Server to identify collected data.
+**WARNING**: You should not install agents on database servers that have the same host name, because host names are used by SSM Server to identify collected data.
 
 ### Storage requirements
 
-Minimum **100** MB of storage is required for installing the PMM Client package. With a good constant connection to PMM Server, additional storage is not required. However, the client needs to store any collected data that it is not able to send over immediately, so additional storage may be required if connection is unstable or throughput is too low.
+Minimum **100** MB of storage is required for installing the SSM Client package. With a good constant connection to SSM Server, additional storage is not required. However, the client needs to store any collected data that it is not able to send over immediately, so additional storage may be required if connection is unstable or throughput is too low.
 
-### Installing PMM Client on Debian or Ubuntu
+### Installing SSM Client on Debian or Ubuntu
 
-If you are running a DEB-based Linux distribution, use the **apt** package manager to install PMM Client from the official Percona software repository.
-
-Percona provides `.deb` packages for 64-bit versions of the following distributions:
+Shattered Silicon provides `.deb` packages for 64-bit versions of the following distributions:
 
 * Debian 8 (jessie)
 * Debian 9 (stretch)
@@ -83,106 +79,111 @@ Percona provides `.deb` packages for 64-bit versions of the following distributi
 * Ubuntu 18.04 (Bionic Beaver)
 
 !!! alert alert-info "Note"
-    PMM Client should work on other DEB-based distributions, but it is tested only on the platforms listed above.
+    SSM Client should work on other DEB-based distributions, but it is tested only on the platforms listed above.
 
-To install the PMM Client package, complete the following procedure. Run the following commands as root or by using the **sudo** command:
+To install the SSM Client package, complete the following procedure. Run the following commands as root or by using the **sudo** command:
 
-1. Configure Percona repositories as described in [Percona Software Repositories Documentation](https://www.percona.com/doc/percona-repo-config/index.html).
-
-2. Install the PMM Client package:
+1. Go to [SSM download page](https://dl.shatteredsilicon.net/ssm/8/), download the appropriate version of SSM client for your GNU/Linux distribution:
 
     ```
-    $ apt-get install pmm-client
+    $ curl -O https://dl.shatteredsilicon.net/ssm/8/DEBS/ssm-client_8.7.1.17.5.2-1_amd64.deb
     ```
 
-    !!! alert alert-info "Note"
-        You can also download PMM Client packages from the [PMM download page](https://www.percona.com/downloads/pmm/). Choose the appropriate PMM version and your GNU/Linux distribution in two pop-up menus to get the download link (e.g. *Percona Monitoring and Management 1.17.2* and *Ubuntu 18.04 (Bionic Beaver*).
+2. Install the SSM Client package:
 
-### Installing the PMM Client Package on Red Hat and CentOS
+    ```
+    $ dpkg -i ssm-client_8.7.1.17.5.2-1_amd64.deb
+    ```
 
-If you are running an RPM-based Linux distribution, use the **yum** package manager to install PMM Client from the official Percona software repository.
+### Installing the SSM Client Package on Red Hat and CentOS
 
-Percona provides `.rpm` packages for 64-bit versions of Red Hat Enterprise Linux 6 (Santiago) and 7 (Maipo), including its derivatives that claim full binary compatibility, such as, CentOS, Oracle Linux, Amazon Linux AMI, and so on.
+If you are running an RPM-based Linux distribution, use the **yum** package manager to install SSM Client from the official Shattered Silicon software repository.
+
+Shattered Silicon provides `.rpm` packages for 64-bit versions of Red Hat Enterprise Linux 6 (Santiago) and 7 (Maipo), including its derivatives that claim full binary compatibility, such as, CentOS, Oracle Linux, Amazon Linux AMI, and so on.
 
 !!! alert alert-info "Note"
-    PMM Client should work on other RPM-based distributions, but it is tested only on RHEL and CentOS versions 6 and 7.
+    SSM Client should work on other RPM-based distributions, but it is tested only on RHEL 8.
 
-To install the PMM Client package, complete the following procedure. Run the following commands as root or by using the **sudo** command:
+To install the SSM Client package, complete the following procedure. Run the following commands as root or by using the **sudo** command:
 
-1. Configure Percona repositories as described in [Percona Software Repositories Documentation](https://www.percona.com/doc/percona-repo-config/index.html).
-
-2. Install the `pmm-client` package:
+1. Install the `ssm-release` package to setup the official Shattered Silicon software repository:
 
     ```
-    yum install pmm-client
+    $ rpm -i https://dl.shatteredsilicon.net/ssm/8/ssm-release-1.0-1.el8.noarch.rpm
+    ```
+
+2. Install the `ssm-client` package:
+
+    ```
+    $ yum install ssm-client
     ```
 
     !!! alert alert-info "Note"
-        You can also download PMM Client packages from the [PMM download page](https://www.percona.com/downloads/pmm/). Choose the appropriate PMM version and your GNU/Linux distribution in two pop-up menus to get the download link (e.g. *Percona Monitoring and Management 1.17.2* and *Red Hat Enterprise Linux / CentOS / Oracle Linux 7*).
+        You can also go to the [SSM download page](https://dl.shatteredsilicon.net/ssm/8/), download the appropriate version of SSM client for your GNU/Linux distribution.
 
-## Connecting PMM Clients to the PMM Server
+## Connecting SSM Clients to the SSM Server
 
-With your server and clients set up, you must configure each PMM Client and specify which PMM Server it should send its data to.
+With your server and clients set up, you must configure each SSM Client and specify which SSM Server it should send its data to.
 
-To connect a PMM Client, enter the IP address of the PMM Server as the value of the `--server` parameter to the **pmm-admin config** command.
+To connect a SSM Client, enter the IP address of the SSM Server as the value of the `--server` parameter to the **ssm-admin config** command.
 
 Run this command as root or by using the **sudo** command
 
 ```
-$ pmm-admin config --server 192.168.100.1:8080
+$ ssm-admin config --server 192.168.100.1:8080
 ```
 
-For example, if your PMM Server is running on 192.168.100.1, and you have installed PMM Client on a machine with IP 192.168.200.1, run the following in the terminal of your client. Run the following commands as root or by using the **sudo** command:
+For example, if your SSM Server is running on 192.168.100.1, and you have installed SSM Client on a machine with IP 192.168.200.1, run the following in the terminal of your client. Run the following commands as root or by using the **sudo** command:
 
 ```
-$ pmm-admin config --server 192.168.100.1
-OK, PMM server is alive.
+$ ssm-admin config --server 192.168.100.1
+OK, SSM server is alive.
 
-PMM Server      | 192.168.100.1
+SSM Server      | 192.168.100.1
 Client Name     | ubuntu-amd641
 Client Address  | 192.168.200.1
 ```
 
-If you change the default port **80** when running PMM Server, specify the new port number after the IP address of PMM Server. For example:
+If you change the default port **80** when running SSM Server, specify the new port number after the IP address of SSM Server. For example:
 
 ```
-$ pmm-admin config --server 192.168.100.1:8080
+$ ssm-admin config --server 192.168.100.1:8080
 ```
 
-## Collecting Data from PMM Clients on PMM Server
+## Collecting Data from SSM Clients on SSM Server
 
-To start collecting data on each PMM Client connected to a server, run the **pmm-admin add** command along with the name of the selected monitoring service.
+To start collecting data on each SSM Client connected to a server, run the **ssm-admin add** command along with the name of the selected monitoring service.
 
 Run the following commands as root or by using the **sudo** command.
 
 Enable general system metrics, MySQL metrics, MySQL query analytics:
 
 ```
-$ pmm-admin add mysql
+$ ssm-admin add mysql
 ```
 
 Enable general system metrics, MongoDB metrics, and MongoDB query analytics:
 
 ```
-$ pmm-admin add mongodb
+$ ssm-admin add mongodb
 ```
 
 Enable ProxySQL performance metrics:
 
 ```
-$ pmm-admin add proxysql:metrics [NAME] [OPTIONS]
+$ ssm-admin add proxysql:metrics [NAME] [OPTIONS]
 ```
 
-To see what is being monitored, run **pmm-admin list**. For example, if you enable
+To see what is being monitored, run **ssm-admin list**. For example, if you enable
 general OS and MongoDB metrics monitoring, the output should be similar to the
 following:
 
 ```
-$ pmm-admin list
+$ ssm-admin list
 
 ...
 
-PMM Server      | 192.168.100.1
+SSM Server      | 192.168.100.1
 Client Name     | ubuntu-amd64
 Client Address  | 192.168.200.1
 Service manager | linux-systemd
@@ -196,7 +197,7 @@ mongodb:metrics  mongo-main  42003       YES      localhost:27017
 
 ## Obtaining Diagnostics Data for Support
 
-PMM Server is able to generate a set of files for enhanced diagnostics, which can be examined and/or shared with Percona Support to solve an issue faster.
+SSM Server is able to generate a set of files for enhanced diagnostics, which can be examined and/or shared with Shattered Silicon Support to solve an issue faster.
 
 Collected data are provided by the `logs.zip` service, and cover the following subjects:
 
@@ -205,87 +206,75 @@ Collected data are provided by the `logs.zip` service, and cover the following s
 * Amazon RDS and Aurora instances
 * Version
 * Server configuration
-* Percona Toolkit commands
+* Shattered Silicon Toolkit commands
 
-You can retrieve collected data from your PMM Server in a single zip archive using this URL:
+You can retrieve collected data from your SSM Server in a single zip archive using this URL:
 
 ```
-https://<address-of-your-pmm-server>/managed/logs.zip
+https://<address-of-your-ssm-server>/managed/logs.zip
 ```
 
 ## Updating
 
-When changing to a new version of PMM, you update the PMM Server and each PMM Client separately.
+When changing to a new version of SSM, you update the SSM Server and each SSM Client separately.
 
-### Updating the PMM Server
+### Updating the SSM Server
 
-!!! alert alert-warning "Warning"
-    Currently PMM Server doesn’t support updates from 1.x to 2.0. Just install the new PMM 2 following its [official installation instructions](../2.x/setting-up/).
+See [Updating SSM Server Using Docker](server/docker.upgrading.md)
 
-The updating procedure of your PMM Server depends on the option that you selected for installing it.
+### Updating a SSM Client
 
-If you are running PMM Server as a virtual appliance or using an Amazon Machine Image, use the Update button on the Home dashboard (see PMM Home Page) in case of available updates.
-
-![](../_images/pmm.home-page.1.png)
-
-*Updating the PMM Server from the PMM home page.*
-
-### Updating a PMM Client
-
-!!! alert alert-warning "Warning"
-    Currently PMM Client has no compatibility between 1.x to 2.0. Coexistence of 1.x and 2.x clients is also not supported. If you need PMM 2.x, remove the old pmm-client package and install the new pmm2-client one following its [installation instructions](../2.x/setting-up/).
-
-When a newer version of PMM Client becomes available, you can update to it from  the Percona software repositories:
+When a newer version of SSM Client becomes available, you can update to it from  the Shattered Silicon software repositories:
 
 Debian or Ubuntu
 
 ```
-$ sudo apt-get update && sudo apt-get install pmm-client
+$ sudo apt-get update && sudo apt-get install ssm-client
 ```
 
 Red Hat or CentOS
 
 ```
-$ yum update pmm-client
+$ yum update ssm-client
 ```
 
-If you installed your PMM client manually, remove it and then download and install a newer version.
+If you installed your SSM client manually, remove it and then download and install a newer version.
 
-## Uninstalling PMM Components
+## Uninstalling SSM Components
 
-Each PMM Client and the PMM Server are removed separately. First, remove all monitored services by using the **pmm-admin remove** command (see [Removing monitoring services](../pmm-admin.md#removing-monitoring-services)). Then you can remove each PMM Client and the PMM Server.
+Each SSM Client and the SSM Server are removed separately. First, remove all monitored services by using the **ssm-admin remove** command (see [Removing monitoring services](../ssm-admin.md#removing-monitoring-services)). Then you can remove each SSM Client and the SSM Server.
 
-### Removing the PMM Client
+### Removing the SSM Client
 
-Remove all monitored instances as described in Removing monitoring services. Then, uninstall the **pmm-admin** package. The exact procedure of removing the PMM Client depends on the method of installation.
+Remove all monitored instances as described in Removing monitoring services. Then, uninstall the **ssm-admin** package. The exact procedure of removing the SSM Client depends on the method of installation.
 
 Run the following commands as root or by using the **sudo** command
 
 Using YUM
 
 ```
-$ yum remove pmm-client
+$ yum remove ssm-client
 ```
 
 Using APT
 
 ```
-$ apt-get remove pmm-client
+$ apt-get remove ssm-client
 ```
 
 Manually installed RPM package
 
 ```
-$ rpm -e pmm-client
+$ rpm -e ssm-client
 ```
 
 Manually installed DEB package
 
 ```
-$ dpkg -r pmm-client
+$ dpkg -r ssm-client
 ```
 
-Using the generic PMM Client tarball.
+Using the generic SSM Client tarball.
 
 **cd** into the directory where you extracted the tarball contents. Then, run the `uninstall` script:
 
@@ -293,24 +282,16 @@ Using the generic PMM Client tarball.
 $ ./uninstall
 ```
 
-### Removing the PMM Server
+### Removing the SSM Server
 
-If you run your PMM Server using Docker, stop the container as follows:
-
-```
-$ docker stop pmm-server && docker rm pmm-server
-```
-
-To discard all collected data (if you do not plan to use PMM Server in the future), remove the `pmm-data` container:
+If you run your SSM Server using Docker, stop the container as follows:
 
 ```
-$ docker rm pmm-data
+$ docker stop ssm-server && docker rm ssm-server
 ```
 
-If you run your PMM Server using a virtual appliance, just stop and remove it.
-
-To terminate the PMM Server running from an Amazon machine image, run the following command in your terminal:
+To discard all collected data (if you do not plan to use SSM Server in the future), remove the `ssm-data` container:
 
 ```
-$ aws ec2 terminate-instances --instance-ids -i-XXXX-INSTANCE-ID-XXXX
+$ docker rm ssm-data
 ```
