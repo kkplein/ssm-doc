@@ -68,7 +68,7 @@ $ sudo ssm-admin add mysql --user root --password root --create-user
 The superuser credentials are required only to set up the `ssm` user with necessary privileges for collecting data.  If you want to create this user yourself, the following privileges are required:
 
 ```
-GRANT SELECT, PROCESS, SUPER, REPLICATION CLIENT, RELOAD ON *.* TO 'ssm'@' localhost' IDENTIFIED BY 'pass' WITH MAX_USER_CONNECTIONS 10;
+GRANT SELECT, PROCESS, SUPER, REPLICATION CLIENT, RELOAD ON *.* TO 'ssm'@'localhost' IDENTIFIED BY 'pass' WITH MAX_USER_CONNECTIONS 10;
 GRANT SELECT, UPDATE, DELETE, DROP ON performance_schema.* TO 'ssm'@'localhost';
 ```
 
