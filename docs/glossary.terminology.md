@@ -8,11 +8,11 @@ By default, Prometheus stores time-series data for 30 days, and QAN stores query
 
 Depending on available disk space and your requirements, you may need to adjust data retention time.
 
-You can control data retention by passing the `METRICS_RETENTION` and `QUERIES_RETENTION` environment variables when creating and running the PMM Server container.
+You can control data retention by passing the `METRICS_RETENTION` and `QUERIES_RETENTION` environment variables when creating and running the SSM Server container.
 
 ## Data Source Name
 
-A database server attribute found on the QAN page. It informs how PMM connects to the selected database.
+A database server attribute found on the QAN page. It informs how SSM connects to the selected database.
 
 ## Default ports
 
@@ -24,7 +24,7 @@ See [Data Source Name](#data-source-name)
 
 ## External Monitoring Service
 
-A monitoring service which is not provided by PMM directly. It is bound to a running Prometheus exporter. As soon as such an service is added, you can set up the [Metrics Monitor](#metrics-monitor-mm) to display its graphs.
+A monitoring service which is not provided by SSM directly. It is bound to a running Prometheus exporter. As soon as such an service is added, you can set up the [Metrics Monitor](#metrics-monitor-mm) to display its graphs.
 
 ## Grand Total Time
 
@@ -36,99 +36,118 @@ See [Grand Total Time](#grand-total-time)
 
 ## Metrics
 
-A series of data which are visualized in PMM.
+A series of data which are visualized in SSM.
 
 ## Metrics Monitor (MM)
 
-Component of PMM Server that provides a historical view of metrics critical to a MySQL server instance.
+Component of SSM Server that provides a historical view of metrics critical to a MySQL server instance.
 
 ## Monitoring service
 
-A special service which collects information from the database instance where [PMM Client](#pmm-client) is installed.
+A special service which collects information from the database instance where [SSM Client](#ssm-client) is installed.
 
-To add a monitoring service, use the [`pmm-admin add`](pmm-admin.md) command.
+To add a monitoring service, use the [`ssm-admin add`](ssm-admin.md) command.
 
 ## Orchestrator
 
-The topology manager for MySQL. By default it is disabled for the [PMM Server](#pmm-server). To enable it, set `ORCHESTRATOR_ENABLED`.
+The topology manager for MySQL. By default it is disabled for the [SSM Server](#ssm-server). To enable it, set `ORCHESTRATOR_ENABLED`.
 
-## PMM
+## SSM
 
-Percona Monitoring and Management
+Shattered Silicon Monitoring
 
-## pmm-admin
+## ssm-admin
 
-A program which changes the configuration of the [PMM Client](#pmm-client). See detailed documentation in the [Managing PMM Client](pmm-admin.md) section.
+A program which changes the configuration of the [SSM Client](#ssm-client). See detailed documentation in the [Managing SSM Client](ssm-admin.md) section.
 
-## PMM annotation
+## SSM annotation
 
-A feature of PMM Server which adds a special mark to all dashboards and signifies an important event in your application. Annotations are added on the PMM Client by using the **pmm-admin annotate** command.
+A feature of SSM Server which adds a special mark to all dashboards and signifies an important event in your application. Annotations are added on the SSM Client by using the **ssm-admin annotate** command.
 
 !!! seealso "See also"
 
     Grafana Documentation: Annotations
     : <http://docs.grafana.org/reference/annotations/>
 
-## PMM Docker Image
+## SSM Docker Image
 
-A docker image which enables installing the PMM Server by using **docker**.
+A docker image which enables installing the SSM Server by using **docker**.
 
 !!! seealso "See also"
-    Installing PMM Server using Docker
-    : [Running PMM Server via Docker](deploy/server/docker.md)
+    Installing SSM Server using Docker
+    : [Running SSM Server via Docker](deploy/server/docker.md)
 
-## PMM Client
+## SSM Client
 
 Collects MySQL server metrics, general system metrics, and query analytics data for a complete performance overview.
 
-The collected data is sent to [PMM Server](#pmm-server).
+The collected data is sent to [SSM Server](#ssm-server).
 
-For more information, see Overview of [Percona Monitoring and Management Architecture](architecture.md).
+For more information, see Overview of [Shattered Silicon Monitoring Architecture](architecture.md).
 
-## PMM Home Page
+## SSM Home Page
 
-The starting page of the PMM portal from which you can have an overview of your environment, open the tools of PMM, and browse to online resources.
+The starting page of the SSM portal from which you can have an overview of your environment, open the tools of SSM, and browse to online resources.
 
-On the PMM home page, you can also find the version number and a button to update your PMM Server (see [PMM Version](#pmm-version)).
+On the SSM home page, you can also find the version number (see [SSM Version](#ssm-version)).
 
-## PMM Server
+## SSM Server
 
-Aggregates data collected by PMM Client and presents it in the form of tables, dashboards, and graphs in a web interface.
+Aggregates data collected by SSM Client and presents it in the form of tables, dashboards, and graphs in a web interface.
 
-PMM Server combines the backend API and storage for collected data with a frontend for viewing time-based graphs and performing thorough analysis of your MySQL and MongoDB hosts through a web interface.
+SSM Server combines the backend API and storage for collected data with a frontend for viewing time-based graphs and performing thorough analysis of your MySQL and MongoDB hosts through a web interface.
 
-Run PMM Server on a host that you will use to access this data.
+Run SSM Server on a host that you will use to access this data.
 
-## PMM Server Version
+## SSM Server Version
 
-If [PMM Server](#pmm-server) is installed via Docker, you can check the current PMM Server version by running **docker exec**:
+If [SSM Server](#ssm-server) is installed via Docker, you can check the current SSM Server version by running **docker exec**:
 
 Run this command as root or by using the **sudo** command
 
 ```
-$ docker exec -it pmm-server head -1 /srv/update/main.yml
-# v1.5.3
+$ docker exec -it ssm-server bash -c 'echo "$SSM_VERSION"'
+# 8.7.1.17.5.2-1
 ```
 
-## PMM user permissions for AWS
+## SSM user permissions for AWS
 
-When creating a [IAM user](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_SettingUp.html#CHAP_SettingUp.IAM) for Amazon RDS DB instance that you intend to monitor in PMM, you need to set all required permissions properly. For this, you may copy the following JSON for your IAM user:
+When creating a [IAM user](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_SettingUp.html#CHAP_SettingUp.IAM) for Amazon RDS DB instance that you intend to monitor in SSM, you need to set all required permissions properly. For this, you may copy the following JSON for your IAM user:
 
 ```
-{ "Version": "2012-10-17",
-  "Statement": [{ "Sid": "Stmt1508404837000",
-                  "Effect": "Allow",
-                  "Action": [ "rds:DescribeDBInstances",
-                              "cloudwatch:GetMetricStatistics",
-                              "cloudwatch:ListMetrics"],
-                              "Resource": ["*"] },
-                 { "Sid": "Stmt1508410723001",
-                   "Effect": "Allow",
-                   "Action": [ "logs:DescribeLogStreams",
-                               "logs:GetLogEvents",
-                               "logs:FilterLogEvents" ],
-                               "Resource": [ "arn:aws:logs:*:*:log-group:RDSOSMetrics:*" ]}
-               ]
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "Stmt1664804420",
+            "Effect": "Allow",
+            "Action": [
+                "rds:DescribeDBInstances",
+                "rds:DescribeDBParameters",
+                "rds:DescribeDBLogFiles",
+                "rds:DownloadDBLogFilePortion",
+                "rds:DescribeDBClusters",
+                "rds:DescribeDBClusterParameters",
+                "cloudwatch:GetMetricStatistics",
+                "cloudwatch:ListMetrics"
+            ],
+            "Resource": [
+                "*"
+            ]
+        },
+        {
+            "Sid": "Stmt1664804472",
+            "Effect": "Allow",
+            "Action": [
+                "logs:DescribeLogStreams",
+                "logs:GetLogEvents",
+                "logs:FilterLogEvents"
+            ],
+            "Resource": [
+                "arn:aws:logs:*:*:log-group:RDSOSMetrics:*"
+            ]
+        }
+    ]
 }
 ```
 
@@ -136,38 +155,36 @@ When creating a [IAM user](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuid
     Creating an IAM user
     : [Creating an IAM user](amazon-rds.md#creating-an-iam-user-with-permission-to-access-amazon-rds-db-instances)
 
-## PMM Version
+## SSM Version
 
-The version of PMM appears at the bottom of the PMM server home page.
+The version of SSM appears at the bottom of the SSM server home page.
 
-![](_images/pmm.home-page.1.png)
-
-To update your PMM Server, click the *Check for Updates Manually* button located next to the version number.
+![](_images/ssm.home-page.1.png)
 
 !!! seealso "See also"
-    Checking the version of PMM Server
-    : [PMM Server Version](#pmm-server-version)
+    Checking the version of SSM Server
+    : [SSM Server Version](#ssm-server-version)
 
 ## Ports
 
-The following ports must be open to enable communication between the PMM Server and PMM clients.
+The following ports must be open to enable communication between the SSM Server and SSM clients.
 
 42000
-: For PMM to collect general system metrics.
+: For SSM to collect general system metrics.
 
 42002
-: For PMM to collect MySQL server metrics.
+: For SSM to collect MySQL server metrics.
 
 42003
-: For PMM to collect MongoDB server metrics.
+: For SSM to collect MongoDB server metrics.
 
 42004
-: For PMM to collect ProxySQL server metrics.
+: For SSM to collect ProxySQL server metrics.
 
 42005
-: For PMM to collect PostgreSQL server metrics.
+: For SSM to collect PostgreSQL server metrics.
 
-Also PMM Server should keep ports 80 or 443 ports open for computers where PMM Client is installed to access the PMM web interface and the QAN agent.
+Also SSM Server should keep ports 80 or 443 ports open for computers where SSM Client is installed to access the SSM web interface and the QAN agent.
 
 !!! seealso "See also"
 
@@ -187,7 +204,7 @@ Query pattern with placeholders. This term appears in [Query Analytics (QAN)](#q
 
 ## Query Analytics (QAN)
 
-Component of PMM Server that enables you to analyze MySQL query performance over periods of time.
+Component of SSM Server that enables you to analyze MySQL query performance over periods of time.
 
 ## Query ID
 
@@ -227,24 +244,6 @@ Predefined time periods which are used by QAN to collect metrics for queries. Th
 ## Selected Time or Date Range
 
 A predefined time period (see [Quick ranges](#quick-ranges)), such as 1 hour, or a range of dates that QAN uses to collects metrics.
-
-## Telemetry
-
-Percona may collect some statistics about the machine where PMM is running.
-
-This statistics includes the following information:
-
-* PMM Server unique ID
-* PMM version
-* The name and version of the operating system, AMI or virtual appliance
-* MySQL version
-* Perl version
-
-You may disable telemetry by passing an additional parameter to Docker.
-
-```
-$ docker run ... -e DISABLE_TELEMETRY=true ... percona/pmm-server:1
-```
 
 ## Version
 
