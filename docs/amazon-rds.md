@@ -163,16 +163,13 @@ When adding a monitoring instance for Amazon RDS, specify a unique name to disti
 Create the `ssm` user with the following privileges on the Amazon RDS instance that you want to monitor:
 
 ```
-GRANT SELECT, PROCESS, REPLICATION CLIENT ON *.* TO 'ssm'@'%' IDENTIFIED BY 'pass' WITH MAX_USER_CONNECTIONS 10;
+CREATE USER IF NOT EXISTS 'ssm'@'%' IDENTIFIED BY 'pass' WITH MAX_USER_CONNECTIONS 10;
+GRANT SELECT, PROCESS, REPLICATION CLIENT ON *.* TO 'ssm'@'%';
 GRANT SELECT, UPDATE, DELETE, DROP ON performance_schema.* TO 'ssm'@'%';
 ```
 
-If you have Amazon RDS with a MySQL version prior to 5.5, REPLICATION CLIENT privilege is not available there and has to be excluded from the above statement.
-
 !!! alert-alert-info "Note"
-    General system metrics are monitored by using the **rds_exporter** Prometheus exporter which replaces **node_exporter**. **rds_exporter** gives access to Amazon Cloudwatch metrics.
-
-    **node_exporter**, used in versions of SSM prior to 1.8.0, was not able to monitor general system metrics remotely.
+    General system metrics are monitored by using the **rds_exporter**, a Prometheus exporter which replaces **node_exporter**. **rds_exporter** harvests data from Amazon Cloudwatch metrics.
 
 !!! seealso "See also"
     Amazon RDS Documentation:
