@@ -21,7 +21,7 @@ The following sample configurations can be used depending on the variant and ver
     ```
     log_output=file
     slow_query_log=ON
-    long_query_time=0
+    long_query_time=0.004
     log_slow_rate_limit=100
     log_slow_rate_type=query
     log_slow_verbosity=full
@@ -33,9 +33,22 @@ The following sample configurations can be used depending on the variant and ver
     userstat=1
     ```
 
-* If you are running MySQL 5.6+ or MariaDB 10.0+, configure [Performance Schema](#configuring-performance-schema).
+* If you are running MySQL 5.6+ or MariaDB 10.0+, and you are concerned about slow log file overhead, configure [Performance Schema](#configuring-performance-schema).
 
     ```
+    innodb_monitor_enable=all
+    performance_schema=ON
+    ```
+
+* If you are running MariaDB 10.0+, and want the better query telemetry from the slow log.
+
+    ```
+    log_output=file
+    slow_query_log=ON
+    long_query_time=0.004
+    log_slow_verbosity=query_plan,explain
+    log_slow_admin_statements=ON
+    log_slow_slave_statements=ON
     innodb_monitor_enable=all
     performance_schema=ON
     ```
@@ -48,7 +61,7 @@ The following sample configurations can be used depending on the variant and ver
     ```
     log_output=file
     slow_query_log=ON
-    long_query_time=0
+    long_query_time=0.004
     log_slow_admin_statements=ON
     log_slow_slave_statements=ON
     ```
