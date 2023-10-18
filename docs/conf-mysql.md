@@ -164,11 +164,10 @@ mysql> select * from setup_consumers;
 15 rows in set (0.00 sec)
 ```
 
-!!! alert alert-warning "Important"
+    !!! alert alert-warning "Important"
     Performance Schema instrumentation is enabled by default in MySQL 5.6.6 and later versions. It is not available at all in MySQL versions prior to 5.6.
 
     If certain instruments are not enabled, you will not see the corresponding graphs in the [MySQL Performance Schema Dashboard](dashboard.mysql-performance-schema.md).  To enable full instrumentation, set the option |opt.performance-schema-instrument| to ``'%=on'`` when starting the MySQL server.
-
     ```
     $ mysqld --performance-schema-instrument='%=on'
     ```
