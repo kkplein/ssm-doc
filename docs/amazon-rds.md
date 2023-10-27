@@ -164,9 +164,15 @@ Create the `ssm` user with the following privileges on the Amazon RDS instance t
 
 ```
 CREATE USER IF NOT EXISTS 'ssm'@'%' IDENTIFIED BY 'pass' WITH MAX_USER_CONNECTIONS 10;
-GRANT SELECT, PROCESS, REPLICATION CLIENT, SHOW VIEW, SLAVE MONITOR ON *.* TO 'ssm'@'%';
+GRANT SELECT, PROCESS, REPLICATION CLIENT ON *.* TO 'ssm'@'%';
 GRANT SELECT, UPDATE, DELETE, DROP ON performance_schema.* TO 'ssm'@'%';
 ```
+
+For MariaDB 10.5+ in RDS, due to missing SUPER privileges, you will also need to add:
+```
+GRANT SHOW VIEW, SLAVE MONITOR ON *.* TO 'ssm'@'localhost';
+```
+
 
 !!! alert-alert-info "Note"
     General system metrics are monitored by using the **rds_exporter**, a Prometheus exporter which replaces **node_exporter**. **rds_exporter** harvests data from Amazon Cloudwatch metrics.
