@@ -164,7 +164,7 @@ Create the `ssm` user with the following privileges on the Amazon RDS instance t
 
 ```
 CREATE USER IF NOT EXISTS 'ssm'@'%' IDENTIFIED BY 'pass' WITH MAX_USER_CONNECTIONS 10;
-GRANT SELECT, PROCESS, REPLICATION CLIENT ON *.* TO 'ssm'@'%';
+GRANT SELECT, PROCESS, REPLICATION CLIENT, SHOW VIEW, SLAVE MONITOR ON *.* TO 'ssm'@'%';
 GRANT SELECT, UPDATE, DELETE, DROP ON performance_schema.* TO 'ssm'@'%';
 ```
 
