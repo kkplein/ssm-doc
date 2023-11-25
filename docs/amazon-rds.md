@@ -128,6 +128,8 @@ To create a new IAM user, select **Users** on the Identity and Access Management
 
 In case, the SSM Server and Amazon RDS DB instance were created by using the same AWS account, you do not need create the access key ID and secret access key manually. SSM retrieves this information automatically and attempts to discover your Amazon RDS DB instances.
 
+On the EC2 instance you run SSM on, make sure that if you have set IMDSv2 use to "Required", you set the hop limit to at least 2 (default is 1). Otherwise, SSM running in a docker container won't be able to access the telemetry via it's IAM authorisation because the new default limits network TTL to 1 hop, and the docker layer adds at least one additional hop.
+
 ### Setting up the Amazon RDS DB Instance
 
 #### Configuring slow query log
