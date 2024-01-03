@@ -1,20 +1,18 @@
 # Welcome
 
-> <b style="color:goldenrod">Important</b> This version of PMM is no longer in active development. See [PMM (LATEST)](../).
+Shattered Silicon Monitoring (SSM) is an open source platform for managing and monitoring MySQL, MariaDB and MongoDB performance. It is a fork of Percona's PMM v1 and maintained by Shattered Silicon, in collaboration with experts in the field of managed database services, support and consulting.
 
-Percona Monitoring and Management (PMM) is an open source platform for managing and monitoring MySQL and MongoDB performance. It is developed by Percona in collaboration with experts in the field of managed database services, support and consulting.
-
-PMM is a free and open-source solution that you can run in your own environment for maximum security and reliability. It provides thorough time-based analysis for MySQL and MongoDB servers to ensure that your data works as efficiently as possible.
+SSM is a free and open-source solution that you can run in your own environment for maximum security and reliability. It provides thorough time-based analysis for MySQL, MariaDB and MongoDB servers to ensure that your data works as efficiently as possible.
 
 ## Basics
 
 * [Architecture Overview](architecture.md)
 * [Deployment Instructions](deploy/index.md)
-* [Tools of PMM](tool.md)
+* [Tools of SSM](tool.md)
 
 ## Advanced
 
-* [Managing PMM Client](pmm-admin.md)
+* [Managing SSM Client](pmm-admin.md)
 * [Adding a MySQL or PostgreSQL Remote DB instance](remote-instance.md)
 * [Adding an Amazon RDS DB instance](amazon-rds.md)
 * [Configuring MySQL for Best Results](conf-mysql.md)
