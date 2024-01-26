@@ -1,4 +1,4 @@
-# PMM Query Analytics
+# SSM Query Analytics
 
 The QAN is a special dashboard which enables database administrators and application developers to analyze database queries over periods of time and find performance problems. QAN helps you optimize database performance by making sure that queries are executed as expected and within the shortest time possible.  In case of problems, you can see which queries may be the cause and get detailed metrics for them.
 
@@ -7,7 +7,7 @@ The QAN is a special dashboard which enables database administrators and applica
 *QAN helps analyze database queries over periods of time and find performance problems.*
 
 !!! alert alert-info "Important"
-    PMM Query Analytics supports MySQL and MongoDB. The minimum requirements for MySQL are:
+    SSM Query Analytics supports MySQL and MongoDB. The minimum requirements for MySQL are:
 
     * MySQL 5.1 or later (if using the slow query log)
     * MySQL 5.6.9 or later (if using Performance Schema)
@@ -18,9 +18,9 @@ In this section
 
 [TOC]
 
-## Opening QAN from the PMM Home Page
+## Opening QAN from the SSM Home Page
 
-To start working with QAN, open the list of dashboards on the PMM home page. Then, proceed to the Host field at the top of the page and select a host where the PMM Client is installed from the list of database instances.
+To start working with QAN, open the list of dashboards on the SSM home page. Then, proceed to the Host field at the top of the page and select a host where the SSM Client is installed from the list of database instances.
 
 The QAN dashboard will show a summary of the selected host and database activity metrics followed by the list of queries in a summary table. By default, QAN shows the top *ten* queries ranked by %GTT (Grand total time). Each query displays three essential metrics: *Load*, *Count*, and *Latency*. Also queries which are newly seen within the the time range selected are highlighted with a blue color for quicker identification.
 
@@ -108,7 +108,7 @@ In addition to the metrics in the Query Metrics Summary Table, **QAN** displays 
 
 ### Explain Section
 
-The Explain section enables you to run **EXPLAIN** on the selected query directly from the PMM web interface (simply specify the database).
+The Explain section enables you to run **EXPLAIN** on the selected query directly from the SSM web interface (simply specify the database).
 
 ![image](_images/qan-realtime-explain.png)
 
@@ -136,16 +136,16 @@ If you are viewing the details of a query of another type, the Explain section w
 
 ### Table Info Section
 
-At the bottom, you can run Table Info for the selected query.  This enables you to get `SHOW CREATE TABLE`, `SHOW INDEX`, and `SHOW TABLE STATUS` for each table used by the query directly from the PMM
+At the bottom, you can run Table Info for the selected query.  This enables you to get `SHOW CREATE TABLE`, `SHOW INDEX`, and `SHOW TABLE STATUS` for each table used by the query directly from the SSM
 web interface.
 
 ![image](_images/qan-create-table.png)
 
 ## Configuring QAN
 
-All *PMM Query Analytics* settings are available from the *Query Analytics Settings* dashboard. To open this dashboard, use the PMM menu group.
+All *SSM Query Analytics* settings are available from the *Query Analytics Settings* dashboard. To open this dashboard, use the SSM menu group.
 
-![](_images/metrics-monitor.menu.pmm.png)
+![](_images/metrics-monitor.menu.ssm.png)
 
 ### Settings Tab
 
@@ -155,7 +155,7 @@ This tab contains several settings which influence how the monitored data are co
 
 ![](_images/qan.settings.1.png)
 
-When you choose to collect MySQL data from *slow log*, a group of read only values becomes available. Note that these settings cannot be set in PMM directly. These are essential parameters of MySQL that affect the operation of *slow log*. If you need to change these settings refer to the appropriate sections of MySQL documentation.
+When you choose to collect MySQL data from *slow log*, a group of read only values becomes available. Note that these settings cannot be set in SSM directly. These are essential parameters of MySQL that affect the operation of *slow log*. If you need to change these settings refer to the appropriate sections of MySQL documentation.
 
 ### Status Tab
 

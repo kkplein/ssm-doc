@@ -1,6 +1,6 @@
 # Welcome
 
-Shattered Silicon Monitoring (SSM) is an open source platform for managing and monitoring MySQL, MariaDB and MongoDB performance. It is a fork of Percona's PMM v1 and maintained by Shattered Silicon, in collaboration with experts in the field of managed database services, support and consulting.
+Shattered Silicon Monitoring (SSM) is an open source platform for managing and monitoring MySQL, MariaDB and MongoDB performance. It is a fork of Percona's SSM v1 and maintained by Shattered Silicon, in collaboration with experts in the field of managed database services, support and consulting.
 
 SSM is a free and open-source solution that you can run in your own environment for maximum security and reliability. It provides thorough time-based analysis for MySQL, MariaDB and MongoDB servers to ensure that your data works as efficiently as possible.
 
@@ -12,12 +12,12 @@ SSM is a free and open-source solution that you can run in your own environment 
 
 ## Advanced
 
-* [Managing SSM Client](pmm-admin.md)
+* [Managing SSM Client](ssm-admin.md)
 * [Adding a MySQL or PostgreSQL Remote DB instance](remote-instance.md)
 * [Adding an Amazon RDS DB instance](amazon-rds.md)
 * [Configuring MySQL for Best Results](conf-mysql.md)
 * [Configuring PostgreSQL for Monitoring](conf-postgres.md)
-* [Configuring MongoDB for Monitoring in PMM Query Analytics](conf-mongodb.md)
+* [Configuring MongoDB for Monitoring in SSM Query Analytics](conf-mongodb.md)
 * [Security Features](security.md)
 * [Metrics Monitor Dashboards](index.metrics-monitor.dashboard.md)
 

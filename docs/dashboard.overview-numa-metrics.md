@@ -3,11 +3,11 @@
 For each node, this dashboard shows metrics related to Non-uniform memory access (NUMA).
 
 !!! alert alert-info "Note"
-    Users who already have [General system metrics service](pmm-admin.md) monitored and would like to add NUMA metrics need to remove and re-add `linux:metrics` on the node:
+    Users who already have [General system metrics service](ssm-admin.md) monitored and would like to add NUMA metrics need to remove and re-add `linux:metrics` on the node:
 
     ```
-    pmm-admin remove linux:metrics
-    pmm-admin add linux:metrics
+    ssm-admin remove linux:metrics
+    ssm-admin add linux:metrics
     ```
 
 ## Memory Usage

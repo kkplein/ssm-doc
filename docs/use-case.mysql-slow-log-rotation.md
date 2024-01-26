@@ -1,6 +1,6 @@
 # Use **logrotate** instead of the slow log rotation feature to manage the MySQL Slow Log
 
-By default, PMM manages the slow log for the added MySQL monitoring service on the computer where PMM Client is installed. This example demonstrates how to substitute **logrotate** for this default behavior.
+By default, SSM manages the slow log for the added MySQL monitoring service on the computer where SSM Client is installed. This example demonstrates how to substitute **logrotate** for this default behavior.
 
 ## Disable the default behavior of the slow log rotation
 
@@ -11,28 +11,28 @@ For this, set the `--slow-log-rotation` to *false*.
 Run this command as root or by using the **sudo** command
 
 ```
-pmm-admin rm mysql:queries
-pmm-admin add mysql:queries --slow-log-rotation=false
+ssm-admin rm mysql:queries
+ssm-admin add mysql:queries --slow-log-rotation=false
 ```
 
-On PMM Server, you can check the value of the Slow logs rotation field on the QAN Settings page. It should be *OFF*.
+On SSM Server, you can check the value of the Slow logs rotation field on the QAN Settings page. It should be *OFF*.
 
 ![](_images/qan.settings.1.png)
 
-On PMM Client (the host where you ran **pmm-admin add** command to add the MySQL monitoring service), use the **pmm-admin list** command to determine if the *slow log* rotation is disabled.
+On SSM Client (the host where you ran **ssm-admin add** command to add the MySQL monitoring service), use the **ssm-admin list** command to determine if the *slow log* rotation is disabled.
 
 ```
-$ pmm-admin list
+$ ssm-admin list
 
-PMM Server      | 127.0.0.1
-Client Name     | percona
+SSM Server      | 127.0.0.1
+Client Name     | ssm
 Client Address  | 172.17.0.1
 Service Manager | linux-systemd
 
 -------------- -------- ----------- -------- ------------------------------------------- --------------------------------------------------------------------------------------
 SERVICE TYPE   NAME     LOCAL PORT  RUNNING  DATA SOURCE                                 OPTIONS
 -------------- -------- ----------- -------- ------------------------------------------- --------------------------------------------------------------------------------------
-mysql:queries  percona  -           YES      root:***@unix(/var/run/mysqld/mysqld.sock)  query_source=slowlog, query_examples=true, slow_log_rotation=false, retain_slow_logs=1
+mysql:queries  ssm      -           YES      root:***@unix(/var/run/mysqld/mysqld.sock)  query_source=slowlog, query_examples=true, slow_log_rotation=false, retain_slow_logs=1
 ```
 
 !!! alert alert-warning "Important"
@@ -41,14 +41,14 @@ mysql:queries  percona  -           YES      root:***@unix(/var/run/mysqld/mysql
     If you already have the MySQL monitoring service where the slow log rotation was not disabled explicitly using the `--slow-log-rotation` option, remove this monitoring service.
 
     ```
-    $ pmm-admin rm mysql
+    $ ssm-admin rm mysql
     ```
 
     Add it again setting the `--slow-log-rotation` to *false*.
 
     ```
-    pmm-admin rm mysql:queries
-    pmm-admin add mysql:queries --slow-log-rotation=false
+    ssm-admin rm mysql:queries
+    ssm-admin add mysql:queries --slow-log-rotation=false
     ```
 
 ## Set up **logrotate** to manage the slow log rotation
@@ -63,7 +63,7 @@ Run this command as root or by using the **sudo** command
 $ logrotate CONFIG_FILE
 ```
 
-*CONFIG_FILE* is a placeholder for a configuration file that you should supply to **logrotate** as a mandatory parameter. To use **logrotate** to manage the *slow log* for PMM, you may supply a file with the following contents.
+*CONFIG_FILE* is a placeholder for a configuration file that you should supply to **logrotate** as a mandatory parameter. To use **logrotate** to manage the *slow log* for SSM, you may supply a file with the following contents.
 
 This is a basic example of **logrotate** for the MySQL slow logs at 1G for 30 copies (30GB).
 

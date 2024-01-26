@@ -1,6 +1,6 @@
 # *Compare System Parameters* Dashboard
 
-The *Compare System Parameters* dashboard allows to compare wide range of parameters of the servers monitored by PMM. Same type parameters are shown side by side for all the servers, grouped in the following sections:
+The *Compare System Parameters* dashboard allows to compare wide range of parameters of the servers monitored by SSM. Same type parameters are shown side by side for all the servers, grouped in the following sections:
 
 * System Information
 * CPU

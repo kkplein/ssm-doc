@@ -5,7 +5,7 @@ This section contains a reference of dashboards available in Metrics Monitor.
 ## Insight
 
 - [Home Dashboard](dashboard.home.md)
-- [PMM System Summary Dashboard](dashboard.pmm-system-summary.md)
+- [SSM System Summary Dashboard](dashboard.ssm-system-summary.md)
 - [Advanced Data Exploration Dashboard](dashboard.advanced-data-exploration.md)
 - [Cross Server Graphs](dashboard.cross-server-graphs.md)
 - [Summary Dashboard](dashboard.summary.md)

@@ -1,6 +1,6 @@
 # Amazon RDS Exporter (rds_exporter)
 
-The Amazon RDS exporter makes the Amazon Cloudwatch metrics available to PMM. PMM uses this exporter to obtain metrics from any Amazon RDS node that you choose to monitor.
+The Amazon RDS exporter makes the Amazon Cloudwatch metrics available to SSM. SSM uses this exporter to obtain metrics from any Amazon RDS node that you choose to monitor.
 
 ## Metrics
 

@@ -11,7 +11,7 @@ This section provides a summary of how exporters are used across the selected ho
 * **Avg CPU Usage per Host** shows the average CPU usage in percent per host for all exporters.
 * **Avg Memory Usage per Host** shows the Exporters average Memory usage per host.
 * **Monitored Hosts** shows the number of monitored hosts that are running Exporters.
-* **Exporters Running** shows the total number of Exporters running with this PMM Server instance.
+* **Exporters Running** shows the total number of Exporters running with this SSM Server instance.
 
 !!! alert alert-info "Note"
     The CPU usage and memory usage do not include the additional CPU and memory usage required to produce metrics by the application or operating system.

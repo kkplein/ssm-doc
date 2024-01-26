@@ -45,7 +45,7 @@ window.addEventListener("DOMContentLoaded", function() {
 
     // Label
 //    var label = document.createElement("span");
-//    label.textContent = "PMM version: ";
+//    label.textContent = "SSM version: ";
 //    container.appendChild(label);
 
     // Add menu

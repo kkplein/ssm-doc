@@ -32,8 +32,8 @@ This section shows the top 10 metrics by time series count and the top 10 hosts 
 
 ## System Level Metrics
 
-Metrics in this section give an overview of the essential system characteristics of PMM Server. This information is also available from the *System Overview* dashboard.
+Metrics in this section give an overview of the essential system characteristics of SSM Server. This information is also available from the *System Overview* dashboard.
 
-## PMM Server Logs
+## SSM Server Logs
 
-This section contains a link to download the logs collected from your PMM Server and further analyze possible problems. The exported logs are requested when you submit a bug report.
+This section contains a link to download the logs collected from your SSM Server and further analyze possible problems. The exported logs are requested when you submit a bug report.

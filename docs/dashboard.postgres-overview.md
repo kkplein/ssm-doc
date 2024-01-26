@@ -6,7 +6,7 @@ This dashboard provides basic information about PostgreSQL hosts.
 
 ## Connected
 
-Reports whether PMM Server can connect to the PostgreSQL instance.
+Reports whether SSM Server can connect to the PostgreSQL instance.
 
 ## Version
 
