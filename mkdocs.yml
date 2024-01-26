@@ -93,18 +93,12 @@ nav:
         - 'deploy/server/docker.upgrading.md'
         - 'deploy/server/docker.backing-up.md'
         - 'deploy/server/docker.restoring.md'
-      - 'Virtual Appliance':
-        - 'deploy/server/virtual-appliance.md'
-        - 'deploy/server/ova.virtualbox.cli.md'
-        - 'deploy/server/ova.virtualbox.gui.md'
-        - 'deploy/server/ova.vmware-workstation-player.md'
-      - 'deploy/server/ami.md'
     - 'Tools of SSM':
       - 'tool.md'
       - 'qan.md'
       - 'metrics-monitor.md'
   - 'Advanced':
-    - 'pmm-admin.md'
+    - 'ssm-admin.md'
     - 'remote-instance.md'
     - 'amazon-rds.md'
     - 'conf-mysql.md'
@@ -114,7 +108,7 @@ nav:
     - 'Metrics Monitor Dashboards':
       - 'index.metrics-monitor.dashboard.md'
       - dashboard.home.md
-      - dashboard.pmm-system-summary.md
+      - dashboard.ssm-system-summary.md
       - dashboard.advanced-data-exploration.md
       - dashboard.cross-server-graphs.md
       - dashboard.summary.md
