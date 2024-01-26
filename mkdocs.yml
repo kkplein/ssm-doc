@@ -1,20 +1,20 @@
 # Default (themed) MkDocs configuration
 
-site_name: Percona Monitoring and Management
+site_name: Shattered Silicon Monitoring and Management
 site_description: Documentation
-site_author: Percona LLC
-copyright: Percona LLC, &#169; 2021
+site_author: Shattered Silicon Ltd
+copyright: Shattered Silicon Ltd, &#169; 2024
 
-repo_name: percona/pmm-doc
-repo_url: https://github.com/percona/pmm-doc
+repo_name: shatteredsilicon/ssm-doc
+repo_url: https://github.com/shatteredsilicon/ssm-doc
 edit_uri: edit/1.x/docs/
 
 use_directory_urls: false
 
 theme:
   name: material
-  logo: _images/percona-logo.svg
-  favicon: _images/percona-favicon.ico
+  logo: _images/Shattered-Silicon-Logo.png
+  favicon: _images/shatteredsilicon-favicon.ico
   palette:
     # Day mode
 #    - media: "(prefers-color-scheme: light)"
@@ -99,7 +99,7 @@ nav:
         - 'deploy/server/ova.virtualbox.gui.md'
         - 'deploy/server/ova.vmware-workstation-player.md'
       - 'deploy/server/ami.md'
-    - 'Tools of PMM':
+    - 'Tools of SSM':
       - 'tool.md'
       - 'qan.md'
       - 'metrics-monitor.md'

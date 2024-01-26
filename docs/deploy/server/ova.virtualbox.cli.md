@@ -27,4 +27,4 @@ grep cloud-init /tmp/pmm-server-console.log
 
 In this script, `[VERSION NUMBER]` is the placeholder of the version of PMM Server that you are installing. By convention **OVA** files start with *pmm-server-* followed by the full version number such as 1.17.4.
 
-To use this script, make sure to replace this placeholder with the the name of the image that you have downloaded from the [Download Percona Monitoring and Management](https://www.percona.com/downloads/pmm) site. This script also assumes that you have changed the working directory (using the **cd** command, for example) to the directory which contains the downloaded image file.
+To use this script, make sure to replace this placeholder with the the name of the image that you have downloaded from the [Download Shattered Silicon Monitoring and Management](https://dl.shatteredsilicon.net/ssm/) site. This script also assumes that you have changed the working directory (using the **cd** command, for example) to the directory which contains the downloaded image file.

@@ -58,22 +58,6 @@ Docker doesn’t support changing environment variables on an already provisione
 
 ## List of PMM Server Parameters
 
-### DISABLE_TELEMETRY
-
-With telemetry enabled, your PMM Server sends some statistics to [v.percona.com](http://v.percona.com) every 24 hours. This statistics includes the following details:
-
-* PMM Server unique ID
-* PMM version
-* The name and version of the operating system
-* MySQL version
-* Perl version
-
-If you do not want your PMM Server to send this information, disable telemetry when running your Docker container:
-
-```
-$ docker run ... -e DISABLE_TELEMETRY=true ... percona/pmm-server:1
-```
-
 ### METRICS_RETENTION
 
 This option determines how long metrics are stored at PMM Server. The value is passed as a combination of hours, minutes, and seconds, such as **720h0m0s**. The minutes (a number followed by *m*) and seconds (a number followed by *s*) are optional.

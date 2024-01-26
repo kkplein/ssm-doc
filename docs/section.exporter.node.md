@@ -1,6 +1,6 @@
 # Node Exporter (node_exporter)
 
-The following options may be passed to the `linux:metrics` monitoring service as additional options. For more information about this exporter see its GitHub repository: [https://github.com/percona/node_exporter](https://github.com/percona/node_exporter).
+The following options may be passed to the `linux:metrics` monitoring service as additional options. For more information about this exporter see its GitHub repository: [https://github.com/shatteredsilicon/node_exporter](https://github.com/shatteredsilicon/node_exporter).
 
 ## Collector options
 

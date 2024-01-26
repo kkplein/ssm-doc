@@ -2,7 +2,7 @@
 
 The following options may be passed to the `proxysql:metrics` monitoring
 service as additional options. For more information about this exporter see its
-GitHub repository: [https://github.com/percona/proxysql_exporter](https://github.com/percona/proxysql_exporter).
+GitHub repository: [https://github.com/shatteredsilicon/proxysql_exporter](https://github.com/shatteredsilicon/proxysql_exporter).
 
 ## Collector Options
 

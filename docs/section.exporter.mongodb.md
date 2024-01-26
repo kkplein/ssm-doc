@@ -1,7 +1,7 @@
 # MongoDB Exporter (mongodb_exporter)
 
 The following options may be passed to the `mongodb:metrics` monitoring service as additional options. For more information about this exporter see its GitHub repository:
-[https://github.com/percona/mongodb_exporter](https://github.com/percona/mongodb_exporter).
+[https://github.com/shatteredsilicon/mongodb_exporter](https://github.com/shatteredsilicon/mongodb_exporter).
 
 ## Options
 
