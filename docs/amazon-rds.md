@@ -172,7 +172,7 @@ GRANT SELECT, UPDATE, DELETE, DROP ON performance_schema.* TO 'ssm'@'%';
 
 For MariaDB 10.5+ in RDS, due to missing SUPER privileges, you will also need to add:
 ```
-GRANT SHOW VIEW, SLAVE MONITOR ON *.* TO 'ssm'@'localhost';
+GRANT SHOW VIEW, SLAVE MONITOR ON *.* TO 'ssm'@'%';
 ```
 
 
