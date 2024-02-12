@@ -17,7 +17,7 @@ SSM is a collection of tools designed to seamlessly work together.  Some are dev
 
 The following diagram illustrates how SSM is currently structured:
 
-![image](_images/diagram.ssm-architecture.png)
+![image](_images/ssm-architecture.png)
 
 ## SSM Client
 
