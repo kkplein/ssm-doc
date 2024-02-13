@@ -157,7 +157,7 @@ Broken network connectivity may be caused by rather wide set of reasons. Particu
 
 Also SSM is able to generate a set of diagnostics data which can be examined and/or shared with Shattered Silicon Support to solve an issue faster. You can get collected logs from SSM Client [using the ssm-admin command](ssm-admin.md). Obtaining logs from SSM Server can be done either [by specifying the URL](deploy/index.md) or by clicking the `server logs` link on the [Prometheus dashboard](dashboard.prometheus.md):
 
-![image](_images/get-logs-from-prometheus-dashboard.png)
+![image](_images/prometheus.png)
 
 ## What resolution is used for metrics?
 
