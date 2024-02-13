@@ -7,7 +7,7 @@ The *Advanced Data Exploration* dashboard provides detailed information about th
 
     This dashboard supports metrics related to NUMA. The names of all these metrics start with *node_memory_numa*.
 
-![](_images/metrics-monitor.advanced-data-exploration.node-memory-numa.png)
+![](_images/node-memory-numa.png)
 
 ## View actual metric values (Gauge)
 
