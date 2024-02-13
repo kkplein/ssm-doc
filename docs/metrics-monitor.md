@@ -25,7 +25,7 @@ To access the dashboards, provide default user credentials:
 
 On the Home screen, select a dashboard from the list of available Shattered Silicon dashboards.  For example, the following image shows the *MySQL Overview* dashboard:
 
-![image](_images/metrics-monitor.png)
+![image](_images/metrics-monitor-overview.png)
 
 ## Opening a Dashboard
 
@@ -46,7 +46,7 @@ You can also use a navigation menu which groups dashboards by application. Click
 | Insight             | Summary, cross-server and Prometheus |
 | SSM                 | Server settings                      |
 
-![](_images/metrics-monitor.menu.png)
+![](_images/metrics-monitor.png)
 
 ## Viewing More Information about a Graph
 
@@ -68,7 +68,7 @@ Click the title of the metric that you are interested in and select the View opt
 
 The selected metric opens to occupy the whole dashboard space. You may now set another time range using the time and date range selector at the top of the Metrics Monitor page and analyze the metric data further.
 
-![](_images/metrics-monitor.cross-server-graphs.load-average.1.png)
+![](_images/cross-server-graphs.png)
 
 !!! alert alert-info "Note"
     If you are zooming in on a metric which is represented as a single number on its dashboard, you cannot change the level of detail by selecting a range on the graph itself.
