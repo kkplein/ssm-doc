@@ -6,7 +6,7 @@ The SSM home page that opens provides an overview of the environment that you ha
 
 From the SSM home page, you can access specific monitoring tools, or dashboards. Each dashboard features a collection of metrics. These are graphs of a certain type that represent one specific aspect showing how metric values change over time.
 
-![SSM Home Page](_images/ssm.home-page.png)
+![SSM Home Page](_images/tools-of-ssm.png)
 
 By default the SSM home page lists most recently used dashboards and helpful links to the information that may be useful to understand SSM better.
 
