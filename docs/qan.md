@@ -2,7 +2,7 @@
 
 The QAN is a special dashboard which enables database administrators and application developers to analyze database queries over periods of time and find performance problems. QAN helps you optimize database performance by making sure that queries are executed as expected and within the shortest time possible.  In case of problems, you can see which queries may be the cause and get detailed metrics for them.
 
-![](_images/query-analytics.png)
+![](_images/ssm-query-analytics.png)
 
 *QAN helps analyze database queries over periods of time and find performance problems.*
 
@@ -145,7 +145,7 @@ web interface.
 
 All *SSM Query Analytics* settings are available from the *Query Analytics Settings* dashboard. To open this dashboard, use the SSM menu group.
 
-![](_images/metrics-monitor.menu.ssm.png)
+![](_images/configuring-qan.png)
 
 ### Settings Tab
 
