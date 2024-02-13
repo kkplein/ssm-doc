@@ -7,23 +7,23 @@ There is a quick method for users to add DBaaS instances to SSM without having t
 
 Both methods can be accessed in the Metrics Monitor navigation menu by selecting the *SSM Add Instance* item in a SSM Dropdown group:
 
-![](_images/metrics-monitor.menu.ssm1.png)
+![](_images/configuring-qan.png)
 
 Two database servers are currently supported by this method: PostgreSQL and MySQL.
 
-![](_images/metrics-monitor.add-rds-or-remote-instance.png)
+![](_images/add-instance.png)
 
 ## Adding a Remote PostgreSQL Instance
 
 To add a remote PostgreSQL DB instance, you will need to fill in three fields: Hostname, Username, and Password, and optionally override the default Port and Name fields:
 
-![](_images/metrics-monitor.add-remote-postgres-instance.png)
+![](_images/add-instance-postgre.png)
 
 ## Adding a Remote MySQL Instance
 
 To add a remote MySQL DB instance, you will need to fill in three fields: Hostname, Username, and Password, and optionally override the default Port and Name fields:
 
-![](_images/metrics-monitor.add-remote-mysql-instance.png)
+![](_images/add-instance-mysql.png)
 
 ## Viewing Remote MySQL and PostgreSQL Instances
 
