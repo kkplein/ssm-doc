@@ -4,6 +4,6 @@ The *SSM System Summary* dashboard shows detailed information about the selected
 
 The System Summary section contains details about the platform while the Database Summary offers detailed statistics about the database server.
 
-![](_images/metrics-monitor.system-summary.png)
+![](_images/ssm-system-summary.png)
 
 You can download the current values on this dashboard locally if you click the Download Summary button.
