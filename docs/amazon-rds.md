@@ -4,7 +4,7 @@ The *SSM Add Instance* is now a preferred method of adding an Amazon RDS DB inst
 
 [TOC]
 
-![](_images/metrics-monitor.add-instance.png)
+![](_images/add-instance-rds.png)
 
 *Enter the access key ID and the secret access key of your IAM user to view Amazon RDS DB instances.*
 
