@@ -175,6 +175,11 @@ For MariaDB 10.5+ in RDS, due to missing SUPER privileges, you will also need to
 GRANT SHOW VIEW, SLAVE MONITOR ON *.* TO 'ssm'@'%';
 ```
 
+For MariaDB 8.0+ in RDS, due to missing SUPER privilege, you will also need to add:
+```
+GRANT SYSTEM_VARIABLES_ADMIN ON *.* TO 'ssm'@'%';
+```
+
 
 !!! alert-alert-info "Note"
     General system metrics are monitored by using the **rds_exporter**, a Prometheus exporter which replaces **node_exporter**. **rds_exporter** harvests data from Amazon Cloudwatch metrics.
