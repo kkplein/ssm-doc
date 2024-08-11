@@ -139,7 +139,7 @@ If this variable is not set to **ON**, add the the following lines to the MySQL 
 performance_schema=ON
 ```
 
-If you are running a custom Performance Schema configuration, make sure that the `statements_digest` consumer is enabled:
+To collect queries from performance_schema, make sure that the `statements_digest` and `events_statements_history` consumers are enabled:
 
 ```
 mysql> select * from setup_consumers;
