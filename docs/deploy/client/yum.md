@@ -4,13 +4,13 @@ If you are running an RPM-based Linux distribution, use the **yum** package
 manager to install SSM Client from the official Shattered Silicon software repository.
 
 Shattered Silicon provides `.rpm` packages for 64-bit versions
-of Red Hat Enterprise Linux 6 (Santiago) and 7 (Maipo),
+of Enterprise Linux 7, 8 and 9,
 including its derivatives that claim full binary compatibility,
-such as, CentOS, Oracle Linux, Amazon Linux AMI, and so on.
+such as, CentOS, Oracle Linux, Alma, Rocky, and so on.
 
 !!! alert alert-info "Note"
     SSM Client should work on other RPM-based distributions,
-but it is tested only on RHEL and CentOS versions 6 and 7.
+but it is tested EL versions 7,8 and 9.
 
 To install the SSM Client package, complete the following procedure. Run the following commands as root or by using the **sudo** command:
 
