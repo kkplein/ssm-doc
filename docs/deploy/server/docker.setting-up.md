@@ -50,7 +50,7 @@ To create and launch SSM Server in one command, use **docker run**:
 
 ```
 $ docker run -d \
-   -p 80:80 \
+   -p 80:80 -p 443:443 \
    --volumes-from ssm-data \
    --name ssm-server \
    --restart always \
@@ -71,7 +71,7 @@ This command does the following:
 
 To install specific SSM Server version instead of the latest one, just put desired version number after the colon. Also in this scenario it may be useful to [prevent updating SSM Server via the web interface](../../glossary.option.md) with the `DISABLE_UPDATES` docker option.
 
-For example, installing version 8.7.1 with disabled update button in the web interface would look as follows:
+For example, installing version 9.4 with http auth username ssm and password "test" would look as follows:
 
 ```
 $ docker create \
@@ -80,15 +80,16 @@ $ docker create \
    -v /var/lib/mysql \
    -v /var/lib/grafana \
    --name ssm-data \
-   shatteredsilicon/ssm-server:latest /bin/true
+   shatteredsilicon/ssm-server:9.4 /bin/true
 
 $ docker run -d \
-   -p 80:80 \
+   -p 80:80 -p 443:443 \
    --volumes-from ssm-data \
    --name ssm-server \
-   -e DISABLE_UPDATES=true \
+   -e SERVER_USER=ssm \
+   -e SERVER_PASSWORD=test \
    --restart always \
-   shatteredsilicon/ssm-server:latest:8.7.1
+   shatteredsilicon/ssm-server:9.4
 ```
 
 ## Additional options
