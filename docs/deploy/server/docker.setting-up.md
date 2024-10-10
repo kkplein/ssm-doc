@@ -11,7 +11,7 @@ The setup begins with pulling the required Docker image. Then, you proceed by cr
 To pull the latest version from Docker Hub:
 
 ```
-$ docker pull shatteredsilicon/ssm-server:1
+$ docker pull shatteredsilicon/ssm-server:latest
 ```
 
 This step is not required if you are running SSM Server for the first time. However, it ensures that if there is an older version of the image tagged with `latest` available locally, it will be replaced by the actual latest version.
