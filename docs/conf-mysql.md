@@ -75,7 +75,7 @@ You can also set up the `ssm` user manually with necessary privileges and pass i
 To enable complete MySQL instance monitoring, a command similar to the following is recommended:
 
 ```
-$ sudo ssm-admin add mysql --user root --password root --create-user
+sudo ssm-admin add mysql --user root --password root --create-user
 ```
 
 The superuser credentials are required only to set up the `ssm` user with necessary privileges for collecting data.  If you want to create this user yourself, the following privileges are required:
@@ -89,7 +89,7 @@ GRANT SELECT, UPDATE, DELETE, DROP ON performance_schema.* TO 'ssm'@'localhost';
 If the `ssm` user already exists, simply pass its credential when you add the instance:
 
 ```
-$ sudo ssm-admin add mysql --user ssm --password pass
+sudo ssm-admin add mysql --user ssm --password pass
 ```
 
 For more information, run as root **ssm-admin add** `mysql --help`.
@@ -170,7 +170,7 @@ Performance Schema instrumentation is enabled by default in MySQL 5.6.6 and late
 
 If certain instruments are not enabled, you will not see the corresponding graphs in the [MySQL Performance Schema Dashboard](dashboard.mysql-performance-schema.md).  To enable full instrumentation, set the option |opt.performance-schema-instrument| to ``'%=on'`` when starting the MySQL server.
 ```
-$ mysqld --performance-schema-instrument='%=on'
+mysqld --performance-schema-instrument='%=on'
 ```
 
 This option can cause additional overhead and should be used with care.
