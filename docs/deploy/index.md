@@ -109,7 +109,7 @@ To install the SSM Client package, complete the following procedure. Run the fol
 1. Install the `ssm-release` package to setup the official Shattered Silicon software repository:
 
     ```
-    $ rpm -i https://dl.shatteredsilicon.net/ssm/8/ssm-release-1.0-1.el8.noarch.rpm
+    $ rpm -i https://dl.shatteredsilicon.net/ssm/9/ssm-release-1.1-1.el9.noarch.rpm
     ```
 
 2. Install the `ssm-client` package:
