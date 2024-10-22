@@ -183,7 +183,7 @@ If you would like to experiment with the latest development version using Docker
 
 ```
 $ curl -O https://dl.shatteredsilicon.net/ssm-dev/9/ssm-server-x86_64-9.4.3-2.tgz
-$ docker import ssm-server-x86_64-9.4.3-2.tgz
+$ docker load -i ssm-server-x86_64-9.4.3-2.tgz
 ```
 
 !!! alert alert-warning "Important"
