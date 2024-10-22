@@ -132,7 +132,7 @@ For more information, run **ssm-admin add** `mysql --help`.
 
 You can remove any monitoring instance as described in Removing monitoring services and then add it back with a different name.
 
-When you remove a monitoring service, previously collected data remains available in Grafana.  However, the metrics are tied to the instance name.  So if you add the same instance back with a different name, it will be considered a new instance with a new set of metrics.  So if you are re-adding an instance and want to keep its previous data, add it with the same name.
+When you remove a monitoring service, previously collected data will be purged from Prometheus and Grafana.  Metrics are tied to the instance name.  So if you add the same instance back with a different name, it will be considered a new instance with a new set of metrics.
 
 ## Can I use non-default ports for instances?
 
@@ -179,11 +179,11 @@ You need to create Orchestrator’s topology user on MySQL according to this sec
 
 ## How to install the experimental version of SSM Server?
 
-If you would like to experiment with the latest development version using Docker, you may go to https://dl.shatteredsilicon.net/ssm-dev/8/, download the exported docker image and import it. This version, however, is not intended to be used in a production environment.
+If you would like to experiment with the latest development version using Docker, you may go to https://dl.shatteredsilicon.net/ssm-dev/9/, download the exported docker image and import it. This version, however, is not intended to be used in a production environment.
 
 ```
-$ curl -O https://dl.shatteredsilicon.net/ssm-dev/8/ssm-server-x86_64-8.7.1.17.5.2-1.dev.20230709.21.10.tgz
-$ docker import ssm-server-x86_64-8.7.1.17.5.2-1.dev.20230709.21.10.tgz
+$ curl -O https://dl.shatteredsilicon.net/ssm-dev/9/ssm-server-x86_64-9.4.3-2.tgz
+$ docker import ssm-server-x86_64-9.4.3-2.tgz
 ```
 
 !!! alert alert-warning "Important"
