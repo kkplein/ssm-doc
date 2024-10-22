@@ -69,9 +69,8 @@ Also, a sanitized copy of DSN (without the passowrd) is stored in Consul API for
 
 ## Where are SSM Client log files located?
 
-Every service created by **ssm-admin** when you add a monitoring instance has a separate log file located in `/var/log/`.  The file names have the following syntax: `ssm-<type>.log`.
+All service created by **ssm-admin** when you add a monitoring instance log to syslog. Main syslog file varies between Linux distributions, but it is typically /var/log/messages on RedHat derived distributions and /var/log/syslog on Debian derived distributions.
 
-For example, the log file for the MySQL QAN monitoring service is `/var/log/ssm-mysql-queries.log`.
 
 You can view all available monitoring instance types and corresponding ports using the **ssm-admin list** command.  For more information, see Listing monitoring services.
 
@@ -99,13 +98,13 @@ Yes, you can use **ssm-admin** to start and stop either individual services that
 To stop all services:
 
 ```
-$ sudo ssm-admin stop --all
+$ sudo ssm-admin stop
 ```
 
 To start all services:
 
 ```
-$ sudo ssm-admin start --all
+$ sudo ssm-admin start
 ```
 
 For more information about starting and stopping services, see [Starting monitoring services](ssm-admin.md).
