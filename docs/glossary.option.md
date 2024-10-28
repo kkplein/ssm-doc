@@ -15,7 +15,7 @@ $ docker run -d -p 80:80 \
   -e SERVER_USER=jsmith \
   -e SERVER_PASSWORD=SomeR4ndom-Pa$$w0rd \
   --restart always \
-  shatteredsilicon/ssm-server:1
+  shatteredsilicon/ssm-server:latest
 ```
 
 ## Passing options to *SSM Server* for an already deployed docker instance
@@ -67,15 +67,23 @@ To set the `METRICS_RETENTION` option to 8 days, set this option to *192h*.
 Run this command as root or by using the **sudo** command
 
 ```
-$ docker run ... -e METRICS_RETENTION=192h ... shatteredsilicon-ssm:1
+$ docker run ... -e METRICS_RETENTION=192h ... shatteredsilicon-ssm:latest
 ```
 
-### QUERIES_RETENTION
+### QUERIES_RETENTIO
 
 This option determines how many days queries are stored at SSM Server.
 
 ```
-$ docker run ... -e QUERIES_RETENTION=30 ... shatteredsilicon-ssm:1
+$ docker run ... -e QUERIES_RETENTION=30 ... shatteredsilicon-ssm:latest
+```
+
+### SSM_SQL_CHECK_TIMEOUT
+
+This option overrides the default monitoring query timeout, particularly for the case where adding remote hosts could time out (e.g. due to extremely large number of tables, in the hundreds of thousands range, where SELECT COUNT(*) FROM information_schema.TABLES takes a long time). Default is 5s, which should be sufficient for most reasonable deployments.
+
+```
+$ docker run ... -e SSM_SQL_CHECK_TIMEOUT=10s ... shatteredsilicon-ssm:latest
 ```
 
 ### ORCHESTRATOR_ENABLED
@@ -83,7 +91,7 @@ $ docker run ... -e QUERIES_RETENTION=30 ... shatteredsilicon-ssm:1
 This option enables Orchestrator. By default it is disabled. It is also disabled if this option contains **false**.
 
 ```
-$ docker run ... -e ORCHESTRATOR_ENABLED=true ... shatteredsilicon-ssm:1
+$ docker run ... -e ORCHESTRATOR_ENABLED=true ... shatteredsilicon-ssm:latest
 ```
 
 ### ORCHESTRATOR_USER
@@ -93,7 +101,7 @@ Pass this option, when running your SSM Server via Docker to set the orchestrato
 This option has no effect if the `ORCHESTRATOR_ENABLED` option is set to **false**.
 
 ```
-$ docker run ... -e ORCHESTRATOR_ENABLED=true ORCHESTRATOR_USER=name -e ORCHESTRATOR_PASSWORD=pass ... shatteredsilicon-ssm:1
+$ docker run ... -e ORCHESTRATOR_ENABLED=true ORCHESTRATOR_USER=name -e ORCHESTRATOR_PASSWORD=pass ... shatteredsilicon-ssm:latest
 ```
 
 ### ORCHESTRATOR_PASSWORD
@@ -103,7 +111,7 @@ Pass this option, when running your SSM Server via Docker to set the orchestrato
 This option has no effect if the `ORCHESTRATOR_ENABLED` option is set to **false**.
 
 ```
-$ docker run ... -e ORCHESTRATOR_ENABLED=true ORCHESTRATOR_USER=name -e ORCHESTRATOR_PASSWORD=pass ... shatteredsilicon-ssm:1
+$ docker run ... -e ORCHESTRATOR_ENABLED=true ORCHESTRATOR_USER=name -e ORCHESTRATOR_PASSWORD=pass ... shatteredsilicon-ssm:latest
 ```
 
 ### SERVER_USER
@@ -113,7 +121,7 @@ By default, the user name is `ssm`. Use this option to use another user name.
 Run this command as root or by using the **sudo** command.
 
 ```
-$ docker run ... -e SERVER_USER=USER_NAME ... shatteredsilicon-ssm:1
+$ docker run ... -e SERVER_USER=USER_NAME ... shatteredsilicon-ssm:latest
 ```
 
 ### SERVER_PASSWORD
@@ -123,7 +131,7 @@ Set the password to access the SSM Server web interface.
 Run this command as root or by using the **sudo** command.
 
 ```
-$ docker run ... -e SERVER_PASSWORD=YOUR_PASSWORD ... shatteredsilicon-ssm:1
+$ docker run ... -e SERVER_PASSWORD=YOUR_PASSWORD ... shatteredsilicon-ssm:latest
 ```
 
 By default, the user name is `ssm`. You can change it by passing the `SERVER_USER` variable.
@@ -135,7 +143,7 @@ This environment variable sets the minimum resolution for checking metrics. You 
 Run this command as root or by using the **sudo** command.
 
 ```
-$ docker run ... -e METRICS_RESOLUTION=VALUE ... shatteredsilicon-ssm:1
+$ docker run ... -e METRICS_RESOLUTION=VALUE ... shatteredsilicon-ssm:latest
 ```
 
 ### METRICS_MEMORY
@@ -151,7 +159,7 @@ If you are still using a version of SSM prior to 1.13 you might need to set the 
 Run this command as root or by using the **sudo** command. The value must be passed in kilobytes. For example, to set the limit to 4 GB of memory run the following command:
 
 ```
-$ docker run ... -e METRICS_MEMORY=4194304 ... shatteredsilicon-ssm:1
+$ docker run ... -e METRICS_MEMORY=4194304 ... shatteredsilicon-ssm:latest
 ```
 
 ### DISABLE_UPDATES
@@ -161,7 +169,7 @@ To update your SSM from web interface you only need to click the Update on the h
 Run this command as root or by using the **sudo** command.
 
 ```
-$ docker run ... -e DISABLE_UPDATES=true ... shatteredsilicon-ssm:1
+$ docker run ... -e DISABLE_UPDATES=true ... shatteredsilicon-ssm:latest
 ```
 
 The `DISABLE_UPDATES` option removes the Update button from the interface and prevents the system from being updated manually.
@@ -171,7 +179,7 @@ The `DISABLE_UPDATES` option removes the Update button from the interface and pr
 To set the filter for remote mysql instances/RDS instances that are added on the server side, you can set up the QAN_FILTER_OMIT environment variable when you create the runtime container like this:
 
 ```
-$ docker run ... -e QAN_FILTER_OMIT=COMMIT,RESET,PING,PREPARE,ROLLBACK,SET ... shatteredsilicon/ssm-server
+$ docker run ... -e QAN_FILTER_OMIT=COMMIT,RESET,PING,PREPARE,ROLLBACK,SET ... shatteredsilicon/ssm-server:latest
 ```
 
 This will set up the default filter for all the mysql instances/RDS instances added on the server side. After you have added the instance, you can go to the SSM Query Analytics Setting.
