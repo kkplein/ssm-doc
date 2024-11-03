@@ -86,6 +86,14 @@ This option overrides the default monitoring query timeout, particularly for the
 $ docker run ... -e SSM_SQL_CHECK_TIMEOUT=10s ... shatteredsilicon-ssm:latest
 ```
 
+### SSM_DISABLE_TABLESTATS_LIMIT
+
+This option specifies the maximum number of tables for which collection of table statistics is enabled for remote MySQL instances/RDS instances (by default, the limit is 1 000 tables). Table statistics includes `auto_increment.columns`, `info_schema.tables`, `info_schema.tablestats`, `perf_schema.indexiowaits`, `perf_schema.tableiowaits`, `perf_schema.tablelocks` and `perf_schema.eventswaits`.
+
+```
+$ docker run ... -e SSM_DISABLE_TABLESTATS_LIMIT=512 ... shatteredsilicon-ssm:latest
+```
+
 ### ORCHESTRATOR_ENABLED
 
 This option enables Orchestrator. By default it is disabled. It is also disabled if this option contains **false**.
