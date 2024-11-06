@@ -167,7 +167,7 @@ The version of SSM appears at the bottom of the SSM server home page.
 
 ## Ports
 
-The following ports must be open to enable communication between the SSM Server and SSM clients.
+The following ports must be open on the SSM client to accept incoming traffic from the SSM Server.
 
 42000
 : For SSM to collect general system metrics.
@@ -184,7 +184,7 @@ The following ports must be open to enable communication between the SSM Server 
 42005
 : For SSM to collect PostgreSQL server metrics.
 
-Also SSM Server should keep ports 80 or 443 ports open for computers where SSM Client is installed to access the SSM web interface and the QAN agent.
+On the SSM Server only ports 80 and/or 443 need to be open for SSM Clients to connect to the SSM web interface and the various APIs, like QAN and prometheus.
 
 !!! seealso "See also"
 
