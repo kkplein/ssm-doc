@@ -14,8 +14,6 @@ You can control data retention by passing the `METRICS_RETENTION` and `QUERIES_R
 -e QUERIES_RETENTION="168h" \
 ```
 
-In case your QAN data pruning is not working, make your container has `/bin/pt-archiver`. We had a bug in the past where the ssm-server container didn't include pt-archiver, and without it, QAN pruning won't be working at all. If your installation is missing it, grab percona-toolkit and copy pt-archiver into the container: `docker cp pt-archiver ssm-server:/bin`.
-
 ## Data Source Name
 
 A database server attribute found on the QAN page. It informs how SSM connects to the selected database.
